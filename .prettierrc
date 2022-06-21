@@ -1,0 +1,23 @@
+{
+    "printWidth": 180,
+    "overrides": [
+        {
+            "files": ".prettierrc",
+            "options": { "parser": "json" }
+        }
+    ],
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "endOfLine": "auto",
+    "eslintIntegration": false,
+    "htmlWhitespaceSensitivity": "ignore",
+    "ignorePath": ".prettierignore",
+    "requireConfig": false,
+    "trailingComma": "es5",
+    "prettier.tslintIntegration": false
+}

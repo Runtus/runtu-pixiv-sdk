@@ -1,0 +1,41 @@
+{
+  "name": "node-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "format": "prettier --write .",
+    "build": "yarn etsc --config=etsc.config.js"
+  },
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "@types/got": "^9.6.12",
+    "@types/koa__router": "^8.0.11",
+    "@types/qs": "^6.9.7",
+    "@types/tunnel": "^0.0.3",
+    "axios": "^0.26.1",
+    "got": "^12.0.0",
+    "hpagent": "^0.1.2",
+    "koa": "^2.13.4",
+    "moment": "^2.29.3",
+    "qs": "^6.10.2",
+    "request": "^2.88.2",
+    "tunnel": "^0.0.6",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.4",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "esbuild": "^0.14.2",
+    "esbuild-node-tsc": "^1.8.2",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "nodemon": "^2.0.15",
+    "prettier": "2.5.1",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0"
+  }
+}
