@@ -1,6 +1,6 @@
 import { Middleware } from '@koa/router'
 import { RankingMode } from '@src/request/type'
-import { getRanks } from '@src/request/ranking/ranks'
+import { getRanks } from '@src/request/ranking/getRanks'
 
 export const RanksCore: (mode: RankingMode) => Middleware = (mode) => {
     return async (ctx, next) => {
@@ -10,7 +10,7 @@ export const RanksCore: (mode: RankingMode) => Middleware = (mode) => {
         console.log(pixiv_images.illusts)
         ctx.body = {
             code: 200,
-            data: pixiv_images.illusts ? pixiv_images : [],
+            data: pixiv_images.illusts ? pixiv_images.illusts : [],
             info: pixiv_images.illusts ? '获取图片成功' : '获取图片失败'
         }
     }

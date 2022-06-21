@@ -18,7 +18,7 @@ axios.defaults.proxy = {
     port: config.proxy.port
 }
 
-export const getRanks = async (mode: RankingMode, access_token: string, range ?: string) => {
+export const getRanks = async (mode: RankingMode, access_token: string, range?: string) => {
     const now_timestamp = new Date().getTime();
     const target_timestamp = now_timestamp - TIME_STAMP_SPACEING[mode];
     const date = range ? moment(range).format("YYYY-DD-MM") : moment(target_timestamp).format("YYYY-DD-MM");
@@ -35,8 +35,8 @@ export const getRanks = async (mode: RankingMode, access_token: string, range ?:
     }
     const response = await axios(options);
     if (response.status === 200) {
-        return response.data
+        return response.data;
     } else {
-        return []
+        return [];
     }
 }

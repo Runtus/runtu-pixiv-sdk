@@ -5,3 +5,6 @@ export const getProxy = () => {
     const port = config.proxy.port ? config.proxy.port : 7890;
     return `${host}:${port}`
 }
+
+export const getPort = () => config.proxy.port;
+export const getHost = () => config.proxy.host;

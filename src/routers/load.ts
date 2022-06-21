@@ -1,5 +1,5 @@
 import { Middleware } from '@koa/router'
-import { getAccessToken, gerRefreshToken } from '@src/request/token'
+import { getAccessToken, gerRefreshToken } from '@src/request/getToken'
 import fs from 'fs'
 import path from 'path'
 
