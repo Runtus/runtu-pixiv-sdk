@@ -1,6 +1,6 @@
-import Router from '@koa/router'
-import { DayRanks, WeekRanks, MonthRanks } from './ranking'
-import { OssDayRanks, OssMonthRanks, OssWeekRanks } from './oss'
+import Router from '@koa/router';
+import { DayRanks, WeekRanks, MonthRanks } from './ranking';
+import { OssDayRanks, OssMonthRanks, OssWeekRanks } from './oss';
 
 const routers = new Router();
 

@@ -1,3 +1,3 @@
 ## pixiv server
 
-- 重构pixiv爬虫服务
+-   重构 pixiv 爬虫服务

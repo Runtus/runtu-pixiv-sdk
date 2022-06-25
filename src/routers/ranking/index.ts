@@ -1,5 +1,5 @@
-import { RankingMode } from '@src/request/type'
-import { RanksCore } from './core'
+import { RankingMode } from '@src/request/type';
+import { RanksCore } from './core';
 
 export const DayRanks = RanksCore(RankingMode.DAY);
 export const WeekRanks = RanksCore(RankingMode.WEEK);

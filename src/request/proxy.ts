@@ -1,10 +1,10 @@
-import { config } from '../config.pixiv'
+import { config } from '../config.pixiv';
 
 export const getProxy = () => {
-    const host = config.proxy.host ? `http://${config.proxy.host}` : "http://127.0.0.1";
+    const host = config.proxy.host ? `http://${config.proxy.host}` : 'http://127.0.0.1';
     const port = config.proxy.port ? config.proxy.port : 7890;
-    return `${host}:${port}`
-}
+    return `${host}:${port}`;
+};
 
 export const getPort = () => config.proxy.port;
 export const getHost = () => config.proxy.host;

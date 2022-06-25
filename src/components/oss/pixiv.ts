@@ -1,72 +1,69 @@
-import ossClient from './config'
-import { getPicStream } from '@src/request/getPixivStream'
-import { RankingMode, PixivPic } from '../../request/type'
+import ossClient from './config';
+import { getPicStream } from '@src/request/getPixivStream';
+import { RankingMode, PixivPic } from '../../request/type';
+import { chooseCollection, close } from '@src/mongodb/index';
 
-const OSS_TIME_OUT = 3000
+type PixivTopMongoDB = {
+    date: string;
+    pics: PixivPic[];
+};
 
-const getOssDicoInfo = async (mode: RankingMode, date: string) => {
-    const list = await ossClient.list({
-        prefix: `pixiv/${mode}/${date}`,
-        "max-keys": "100"
-    }, {
-        timeout: OSS_TIME_OUT
-    });
+// 获取oss中对应图片
+const getOssUrls = async (mode: RankingMode, date: string) => {
+    const collection = await chooseCollection(mode);
+    const data =
+        (await collection.findOne({
+            date: date,
+        })) || {};
+    return data;
+};
 
-    if (list.res.status === 200) {
-        return list.objects;
-    } else {
-        return []
-    }
-}
-
-const storageOss = async (pics: PixivPic[], mode: RankingMode, date: string) => {
-    const ossUrls = await Promise.all(pics.map(item => getPicStream(item.url)
-        .then(res => {
-            if (res) {
-                return ossClient.put(`/pixiv/${mode}/${date}/${item.id}-${item.title}-${item.author}.jpg`, res)
-            } else {
-                return null
-            }
-        })
-        .then(res => {
-            return {
-                id: item.id,
-                title: item.title,
-                url: res.url,
-                author: item.author,
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            return {
-                id: '',
-                title: '404',
-                url: 'https://lao-lan-go.oss-cn-beijing.aliyuncs.com/404.png',
-                author: '404'
-            }
-        })
-    ))
+const putOssPixiv = async (pics: PixivPic[], mode: RankingMode, date: string) => {
+    const ossUrls = await Promise.all(
+        pics.map(item =>
+            getPicStream(item.url)
+                .then(res => {
+                    if (res) {
+                        return ossClient.put(`/pixiv/${mode}/${date}/${item.id}.jpg`, res);
+                    } else {
+                        return null;
+                    }
+                })
+                .then(res => {
+                    return {
+                        id: item.id,
+                        title: item.title,
+                        url: res.url,
+                        author: item.author,
+                    };
+                })
+                .catch(err => {
+                    console.error(err);
+                    return {
+                        id: '',
+                        title: '404',
+                        url: 'https://lao-lan-go.oss-cn-beijing.aliyuncs.com/404.png',
+                        author: '404',
+                    };
+                })
+        )
+    );
     return ossUrls;
-}
-
+};
 
 export const getPicsUrls = async (pics: PixivPic[], mode: RankingMode, date: string): Promise<PixivPic[]> => {
-    const cache = await getOssDicoInfo(mode, date);
-    console.log(cache)
-    if (cache.length) {
-        return cache.slice(1).map(item => {
-            const title = item.name.split('/')[3];
-            // 图片的一些源信息包含在title中，并且其已经在storage时使用符号'-'进行分割
-            const metaArray = title.split('-');
-            const id = metaArray[0], pic_title = metaArray[1], author = metaArray[2];
-            return {
-                url: item.url,
-                title: pic_title,
-                author,
-                id
-            }
-        })
+    const cache = (await getOssUrls(mode, date)) as unknown as PixivTopMongoDB;
+    if (cache.pics) {
+        return cache.pics;
     } else {
-        return await storageOss(pics, mode, date);
+        const ossUrls = await putOssPixiv(pics, mode, date);
+        // 为了不阻塞，不使用await
+        await chooseCollection(mode).then(res => {
+            res.insertOne({
+                date,
+                pics: ossUrls,
+            });
+        });
+        return ossUrls;
     }
-}
+};

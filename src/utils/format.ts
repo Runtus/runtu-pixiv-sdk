@@ -1,3 +1,3 @@
 export const time = (a: string): string => {
-  return a + "12";
+    return a + '12';
 };
