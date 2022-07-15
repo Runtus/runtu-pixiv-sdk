@@ -5,6 +5,7 @@
     "license": "MIT",
     "scripts": {
         "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
+        "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
         "format": "prettier --write .",
         "build": "yarn etsc --config=etsc.config.js",
         "service": "pm2 start src/index.ts --name='pixiv'"
