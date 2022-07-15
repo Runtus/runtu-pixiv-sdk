@@ -1,20 +1,12 @@
 import { RankingMode, WebPixivType } from '../type';
 import { Header } from '../header';
-import { config } from '../../config.pixiv';
-import axios from 'axios';
+import axios from '../axios.pixiv.api';
 import moment from 'moment';
 import qs from 'qs';
 
 type RanksIllusts = {
-    data: WebPixivType,
-    date: string
-}
-
-const BASE_URL = 'https://app-api.pixiv.net';
-axios.defaults.baseURL = BASE_URL;
-axios.defaults.proxy = {
-    host: config.proxy.host,
-    port: config.proxy.port,
+    data: WebPixivType;
+    date: string;
 };
 
 let retry = 0;
@@ -42,8 +34,8 @@ export const getRanks = async (mode: RankingMode, access_token: string, range?: 
             date,
             data: {
                 illusts: [],
-                next_url: ''
-            }
+                next_url: '',
+            },
         };
     }
 
@@ -52,10 +44,10 @@ export const getRanks = async (mode: RankingMode, access_token: string, range?: 
         retry = 0;
         return {
             date,
-            data: response.data
+            data: response.data,
         };
     } else {
         // 说明榜单还没更新，直接获取两天前的榜单
-        return getRanks(mode, access_token, moment().subtract(2,'days').format('YYYY-MM-DD'))
+        return getRanks(mode, access_token, moment().subtract(2, 'days').format('YYYY-MM-DD'));
     }
 };

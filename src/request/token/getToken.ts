@@ -1,8 +1,8 @@
 // @ts-ignore
 import request from 'request';
-import { Header as headers } from './header';
-import { config } from '../config.pixiv';
-import { getProxy } from './proxy';
+import { Header as headers } from '../header';
+import { config } from '../../config.pixiv';
+import { getProxy } from '../proxy';
 import qs from 'qs';
 
 // pixiv内置参数

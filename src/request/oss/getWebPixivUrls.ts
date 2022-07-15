@@ -5,7 +5,7 @@ import { getRanks } from '@src/request/ranking/getRanks';
 // 请求Webpixiv图片url，并格式化成需要的格式
 export const getPixivUrls = async (mode: RankingMode, access_token: string) => {
     const pixivPics: PixivPic[] = [];
-    const {data: result} = (await getRanks(mode, access_token));
+    const { data: result } = await getRanks(mode, access_token);
 
     if (result.illusts) {
         result.illusts.forEach(item => {
