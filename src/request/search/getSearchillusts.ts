@@ -3,7 +3,6 @@ import qs from 'qs'
 import { WebPixivType } from '../type'
 import { Header } from '@src/request/header'
 
-
 export const getKeywordsIllusts = async (keywords: string, access_token: string): Promise<WebPixivType> => {
     const params = qs.stringify({
         search_target: 'partial_match_for_tags',
