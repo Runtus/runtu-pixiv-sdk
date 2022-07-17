@@ -33,6 +33,6 @@ jobs:
         SSH_PAIVATE_KEY : ${{secrets.ALIYUN}}
         ARGS: "-rltgoDzvO --delete"
         SOURCE: "/"
-        REMOTE_HOST: "http://121.41.87.95"
+        REMOTE_HOST: "121.41.87.95"
         REMOTE_USER: "root"
         TARGET: "/root/pixiv-server"
