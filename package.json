@@ -8,7 +8,7 @@
         "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
         "format": "prettier --write .",
         "build": "yarn etsc --config=etsc.config.js",
-        "service": "pm2 start src/index.ts --name='pixiv'"
+        "service": "pm2 start"
     },
     "dependencies": {
         "@koa/router": "^10.1.1",
