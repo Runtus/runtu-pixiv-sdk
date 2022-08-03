@@ -10,7 +10,7 @@ export const getKeywordsIllusts = async (keywords: string, access_token: string)
         word: keywords
     })
     const response = await axios({
-        url: `/v1/search/popular-preview/illust?${params}`,
+        url: `/search/popular-preview/illust?${params}`,
         headers: {
             ...Header,
             Authorization: `Bearer ${access_token}`,

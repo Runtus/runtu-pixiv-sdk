@@ -1,12 +1,13 @@
 import oss from 'ali-oss';
 
+// 暂时不需要oss 
 const client = new oss({
-    accessKeyId: 'LTAI4FskGErR3Y576ZUSEzT6',
-    accessKeySecret: 'NpcnD4JuKIt0IR275uVSzHLLVsLMCy',
-    bucket: 'lao-lan-go',
-    region: 'oss-cn-beijing',
+    accessKeyId: '',
+    accessKeySecret: '',
+    bucket: '',
+    region: '',
 });
 
-client.useBucket('lao-lan-go');
+client.useBucket('');
 
 export default client;

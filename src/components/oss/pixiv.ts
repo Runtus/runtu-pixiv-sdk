@@ -42,7 +42,7 @@ const putOssPixiv = async (pics: PixivPic[], mode: RankingMode, date: string) =>
                     return {
                         id: '',
                         title: '404',
-                        url: 'https://lao-lan-go.oss-cn-beijing.aliyuncs.com/404.png',
+                        url: '',
                         author: '404',
                     };
                 })

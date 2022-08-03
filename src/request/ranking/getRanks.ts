@@ -19,7 +19,7 @@ export const getRanks = async (mode: RankingMode, access_token: string, range?: 
         date,
     });
     const options = {
-        url: `/v1/illust/ranking?${params}`,
+        url: `/illust/ranking?${params}`,
         headers: {
             ...Header,
             Authorization: `Bearer ${access_token}`,
