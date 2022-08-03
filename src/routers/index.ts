@@ -15,6 +15,6 @@ routers.get('/ranks/month', MonthRanks);
 // routers.get('/oss/month', OssMonthRanks);
 
 routers.get('/illusts/search', Search.illust);
-routers.get('/author/search')
+routers.get('/author/search', Search.author)
 
 export default routers;
