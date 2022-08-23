@@ -391,6 +391,11 @@
   resolved "https://registry.npmmirror.com/@types/range-parser/download/@types/range-parser-1.2.4.tgz?cache=0&sync_timestamp=1637268455466&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Frange-parser%2Fdownload%2F%40types%2Frange-parser-1.2.4.tgz"
   integrity sha1-zWZ7z90CUhOq+3ylkVqTJZCs3Nw=
 
+"@types/readline-sync@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.npmmirror.com/@types/readline-sync/-/readline-sync-1.4.4.tgz#8568292efe4ddd94d0ccee958b29cc3f4e0ea140"
+  integrity sha512-cFjVIoiamX7U6zkO2VPvXyTxbFDdiRo902IarJuPVxBhpDnXhwSaVE86ip+SCuyWBbEioKCkT4C88RNTxBM1Dw==
+
 "@types/responselike@*", "@types/responselike@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmmirror.com/@types/responselike/download/@types/responselike-1.0.0.tgz?cache=0&sync_timestamp=1637269963790&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fresponselike%2Fdownload%2F%40types%2Fresponselike-1.0.0.tgz#251f4fe7d154d2bad125abe1b429b23afd262e29"
@@ -908,6 +913,11 @@ base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.npmmirror.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
+
+base64url@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmmirror.com/base64url/-/base64url-3.0.1.tgz#6399d572e2bc3f90a9a8b22d5dbb0a32d33f788d"
+  integrity sha512-ir1UPr3dkwexU7FdV8qBBbNDRUhMmIekYMFZfi+C/sLNnRESKPl23nB9b2pltqfOQNnGzsDdId90AEtG5tCx4A==
 
 base@^0.11.1:
   version "0.11.2"
@@ -2868,6 +2878,11 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+jquery-deferred@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.npmmirror.com/jquery-deferred/-/jquery-deferred-0.3.1.tgz#596eca1caaff54f61b110962b23cafea74c35355"
+  integrity sha512-YTzoTYR/yrjmNh6B6exK7lC1jlDazEzt9ZlZvdRscv+I1AJqN1SmU3ZAn4iMGiVhwAavCrbijDVyTc0lmr9ZCA==
+
 js-base64@^2.5.2:
   version "2.6.4"
   resolved "https://registry.npmmirror.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -3087,6 +3102,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.nlark.com/lodash.merge/download/lodash.merge-4.6.2.tgz"
   integrity sha1-VYqlO0O2YeGSWgr9+japoQhf5Xo=
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 lowercase-keys@^1.0.0, lowercase-keys@^1.0.1:
   version "1.0.1"
@@ -3330,6 +3350,15 @@ mz@^2.7.0:
     any-promise "^1.0.0"
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
+
+najax@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/najax/-/najax-1.0.7.tgz#706dce52d4b738dce01aee97f392ccdb79d51eef"
+  integrity sha512-JqBMguf2plv1IDqhOE6eebnTivjS/ej0C/Sw831jVc+dRQIMK37oyktdQCGAQtwpl5DikOWI2xGfIlBPSSLgXg==
+  dependencies:
+    jquery-deferred "^0.3.0"
+    lodash "^4.17.21"
+    qs "^6.2.0"
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -3836,6 +3865,13 @@ qs@^6.10.2:
   dependencies:
     side-channel "^1.0.4"
 
+qs@^6.2.0:
+  version "6.11.0"
+  resolved "https://registry.npmmirror.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
+  integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
+  dependencies:
+    side-channel "^1.0.4"
+
 qs@^6.4.0:
   version "6.10.5"
   resolved "https://registry.npmmirror.com/qs/-/qs-6.10.5.tgz#974715920a80ff6a262264acd2c7e6c2a53282b4"
@@ -3914,6 +3950,11 @@ readdirp@~3.6.0:
   integrity sha1-dKNwvYVxFuJFspzJc0DNQxoCpsc=
   dependencies:
     picomatch "^2.2.1"
+
+readline-sync@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.npmmirror.com/readline-sync/-/readline-sync-1.4.10.tgz#41df7fbb4b6312d673011594145705bf56d8873b"
+  integrity sha512-gNva8/6UAe8QYepIQH/jQ2qn91Qj0B9sYjMBBs3QOB8F2CXcKgLxQaJRP76sWVRQt+QU+8fAkCbCvjjMFu7Ycw==
 
 rechoir@^0.7.0:
   version "0.7.1"
