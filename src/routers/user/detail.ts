@@ -1,9 +1,9 @@
 import { Middleware } from '@koa/router'
-import { getAuthorInfo } from '@src/request/search/getSearchAuthor'
+import { getAuthorInfo } from '@src/request/user/getUserDetail'
 
 // test id: 15989854
 
-export const Authors: Middleware = async (ctx, next) => {
+export const Details: Middleware = async (ctx, next) => {
     const authorid = ctx.query.id as string || ''
     const access_token = ctx.token.access_token
     const response = await getAuthorInfo(authorid, access_token)

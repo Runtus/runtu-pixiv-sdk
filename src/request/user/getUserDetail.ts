@@ -1,3 +1,5 @@
+// /v1/user/detail  用户/画师主页信息
+
 import axios from '../axios.pixiv.api'
 import qs from 'qs'
 import { Header } from '@src/request/header'

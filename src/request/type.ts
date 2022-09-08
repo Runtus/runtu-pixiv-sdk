@@ -4,6 +4,9 @@ export enum RankingMode {
     MONTH = 'month',
 }
 
+// 作者作品类型： 漫画 | 插画
+export type UserIllustsType = 'manga' | 'illust'
+
 export type WebPixivType = {
     illusts: Array<{
         id: string;
@@ -30,3 +33,4 @@ export type PixivPic = {
     url: string;
     author: string;
 };
+
