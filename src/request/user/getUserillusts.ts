@@ -12,6 +12,7 @@ export const getUserIllusts = async (id: string, type: UserIllustsType, access_t
     
     console.log('query', query)
     const response = await axios({
+        method: "GET",
         url: `/user/illusts?${query}`,
         headers: {
             ...Header,
