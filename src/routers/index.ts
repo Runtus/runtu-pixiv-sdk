@@ -1,6 +1,7 @@
 import Router from '@koa/router';
 import { DayRanks, WeekRanks, MonthRanks } from './ranking';
 import { Search } from './search'
+import { User } from './user'
 
 const routers = new Router();
 
@@ -9,6 +10,8 @@ routers.get('/ranks/week', WeekRanks)
 routers.get('/ranks/month', MonthRanks)
 
 routers.get('/illusts/search', Search.illust)
-routers.get('/author/search', Search.author)
+
+routers.get('/user/detail', User.Detail)
+routers.get('/user/illusts', User.Illusts)
 
 export default routers;
