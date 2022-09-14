@@ -33,4 +33,3 @@ export type PixivPic = {
     url: string;
     author: string;
 };
-
