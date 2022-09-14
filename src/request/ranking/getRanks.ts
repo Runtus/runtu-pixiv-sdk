@@ -17,14 +17,15 @@ export const getRanks = async (mode: RankingMode, access_token: string, range?: 
         mode,
         filter: 'for_ios',
         date,
-    });
+    })
+
     const options = {
         url: `/illust/ranking?${params}`,
         headers: {
             ...Header,
             Authorization: `Bearer ${access_token}`,
         },
-    };
+    }
     const response = await axios(options);
     retry++;
     // 没请求到数据返回空

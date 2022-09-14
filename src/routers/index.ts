@@ -3,6 +3,8 @@ import { DayRanks, WeekRanks, MonthRanks } from './ranking';
 import { Search } from './search'
 import { User } from './user'
 
+import fs from 'fs'
+
 const routers = new Router();
 
 routers.get('/ranks/day', DayRanks)
