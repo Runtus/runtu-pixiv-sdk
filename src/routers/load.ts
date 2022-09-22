@@ -24,7 +24,7 @@ export const getAccessTokenCache = async () => {
         const res = await Token.refresh()
         result.access_token = res.access_token
         result.refresh_token = res.refresh_token
-        result.time_stamp = new Date().getTime() + 1000 * 3600
+        result.time_stamp = new Date().getTime() + 1000 * 1800
         fs.writeFileSync(
             path.resolve(__dirname, './access.json'),
             JSON.stringify(result)
@@ -32,7 +32,7 @@ export const getAccessTokenCache = async () => {
     // AccessToken过期的情况
     } else if (cache.time_stamp > now || cache.access_token.length === 0) {
         result.access_token = await Token.access(result.refresh_token)
-        result.time_stamp = new Date().getTime() + 1000 * 3600
+        result.time_stamp = new Date().getTime() + 1000 * 1800
         fs.writeFileSync(
             path.resolve(__dirname, './access.json'),
             JSON.stringify(result)
