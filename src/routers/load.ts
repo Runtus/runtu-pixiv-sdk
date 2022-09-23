@@ -29,8 +29,8 @@ export const getAccessTokenCache = async () => {
             path.resolve(__dirname, './access.json'),
             JSON.stringify(result)
         );
-    // AccessToken过期的情况
-    } else if (cache.time_stamp > now || cache.access_token.length === 0) {
+    // AccessToken过期的情况，即超时
+    } else if (cache.time_stamp <= now || cache.access_token.length === 0) {
         result.access_token = await Token.access(result.refresh_token)
         result.time_stamp = new Date().getTime() + 1000 * 1800
         fs.writeFileSync(
