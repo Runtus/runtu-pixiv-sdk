@@ -1,19 +1,16 @@
-import { Middleware } from '@koa/router';
 import { RankingMode } from '@src/request/type';
 import { getRanks } from '@src/request/ranking/getRanks';
 
-export const RanksCore: (mode: RankingMode) => Middleware = mode => {
-    return async (ctx, next) => {
-        const access_token = ctx.token.access_token;
-        const range = ctx.query.range || '';
-        const { data: pixiv_images, date } = await getRanks(mode, access_token, range as string);
-        ctx.body = {
+export const RanksCore = (mode: RankingMode) => {
+    return async (access_token: string, range: string) => {
+        const { data: pixivImages, date } = await getRanks(mode, access_token, range as string);
+        return {
             code: 200,
             data: {
                 date,
-                illusts: pixiv_images.illusts,
+                illusts: pixivImages.illusts,
             },
-            info: pixiv_images.illusts.length ? '获取图片成功' : '获取图片失败',
+            info: pixivImages.illusts.length ? '获取图片成功' : '获取图片失败',
         };
     };
 };
