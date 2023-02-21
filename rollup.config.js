@@ -31,6 +31,7 @@ const plugins = [
   resolve({
     preferBuiltins: true,
   }),
+  // 根据tsconfig.json的情况进行打包
   ts({ tsconfig: './tsconfig.json', tsconfigOverride: override }),
   json(),
   commonjs(),

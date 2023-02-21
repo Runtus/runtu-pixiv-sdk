@@ -1,8 +1,19 @@
-import { describe, it } from 'vitest'
+import { describe, it, expect } from 'vitest'
+import { getRefreshToken } from './getRefreshToken'
 
 describe('suite', () => {
-    it('serial test',  () => {
-        console.log('test')
+    it('serial test', () => {
+        // getRefreshToken({
+        //     host: "127.0.0.1",
+        //     port: 7890
+        // }).then(res => {
+        //     console.log(res.refresh_token)
+        //     expect(!!res.access_token.length).toBe(true)
+        // })
+        
     })
-    it.concurrent('test1', (({expect}) => {expect(3 + 9).toBe(12)}))
+    it("serial tesss", () => {
+        expect(2 + 3).toBe(5)
+    })
+
 })

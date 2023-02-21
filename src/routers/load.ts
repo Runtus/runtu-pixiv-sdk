@@ -9,7 +9,6 @@ type Cache = {
 };
 
 export const getAccessTokenCache = async (proxy: AxiosProxyConfig) => {
-    console.log('执行了Cache')
     if (!fs.existsSync(path.resolve(__dirname, './access.json'))) {
         fs.writeFileSync(path.resolve(__dirname, './access.json'), JSON.stringify({}))
     }
@@ -19,7 +18,8 @@ export const getAccessTokenCache = async (proxy: AxiosProxyConfig) => {
         refresh_token: cache.refresh_token || '',
     }
 
-    // RefreshToken为空的情况
+
+    // access.json为空
     if (result.refresh_token.length === 0) {
         const res = await Token.refresh(proxy)
         result.access_token = res.access_token
@@ -31,8 +31,8 @@ export const getAccessTokenCache = async (proxy: AxiosProxyConfig) => {
     // AccessToken过期的情况，即超时
     } else {
         const access = await Token.access(result.refresh_token)
-        if (access.data) {
-            result.access_token = (access.data)
+        if (access.data && access.data.access_token) {
+            result.access_token = access.data.access_token
         }
 
         fs.writeFileSync(
@@ -40,6 +40,7 @@ export const getAccessTokenCache = async (proxy: AxiosProxyConfig) => {
             JSON.stringify(result)
         )
     }
+    console.log('result', result)
 
     return result
 }

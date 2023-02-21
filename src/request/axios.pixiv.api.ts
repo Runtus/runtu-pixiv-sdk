@@ -11,5 +11,4 @@ export const setProxy = (proxy?: AxiosProxyConfig) => {
     }
 }
 
-
 export default axios

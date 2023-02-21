@@ -29,15 +29,20 @@ export const getRefreshToken = async (proxy: AxiosProxyConfig) => {
         code_challenge_method: 'S256',
         client: 'pixiv-android'
     }
-    console.log('Please copy the below link to the brower and login using your account')
-    console.log(`🌟 ${LOGIN_URL}?${qs.stringify(login_params)} 🌟`)
-    console.log('Before you login, you should enter the F12 to open brower developer.')
-    console.log('After you login, you can see the string "pixiv://xxxxxx..." in the console, copy them and input here')
+    console.log('1111111')
+    // console.log(`Please copy the below link to the brower and login using your account \n
+    // 🌟 ${LOGIN_URL}?${qs.stringify(login_params)} 🌟 \n
+    // Before you login, you should enter the F12 to open brower developer. \n
+    // After you login, you can see the string "pixiv://xxxxxx..." in the console, copy them and input here.`)
     let token = ''
     let isOver = false
     while (!isOver) {
         try {
-            token = qs.parse(readline.question('copy the link and patse it here: ').split("?")[1]).code as string
+            token = qs.parse(readline.question(`Please copy the below link to the brower and login using your account \n
+            🌟 ${LOGIN_URL}?${qs.stringify(login_params)} 🌟 \n
+            Before you login, you should enter the F12 to open brower developer. \n
+            After you login, you can see the string "pixiv://xxxxxx..." in the console, copy them and input here. \n
+            copy the link and patse it here: `).split("?")[1]).code as string
             if (token.length !== 0) {
                 isOver = true
             }
