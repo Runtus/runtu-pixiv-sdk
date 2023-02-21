@@ -1,8 +1,9 @@
 import { PixivRequestSpace } from '@src/routers/index';
-import { Init } from './init';
+import { init } from './init';
 import { AxiosProxyConfig } from 'axios';
 import { setProxy } from '@src/request/axios.pixiv.api';
 import { getAccessTokenCache } from '@src/routers/load';
+import { DecortorParamsFn, UserIllustsType } from './type'
 
 export class RPixiv {
     static TIMESTAMP = 60 * 1000 * 15; // 令牌15分钟有效
@@ -46,15 +47,15 @@ export class RPixiv {
     }
 
     async init() {
-        const response = await Init.tokenCache(this.proxy_config);
+        const response = await init(this.proxy_config);
         console.log(response.access_token)
         this.setAccessToken(response.access_token);
         this.setRefreshToken(response.refresh_token);
         this.setStartTime(new Date().getTime());
     }
 
-    // 获取数据的专用修饰器
-    async decoratorForData(fn: (token: string, ...params: any) => any, ...params: any) {
+    // 装饰器
+    async decoratorForData (fn: DecortorParamsFn, ...params: any) {
         if (!this.refreshToken) {
             await this.init();
         }
@@ -73,13 +74,19 @@ export class RPixiv {
     getMonthRanks(range: string) {
         return this.decoratorForData(PixivRequestSpace.getMonthRanks, range);
     }
+
+    searchIllusts(keywords: string) {
+        return this.decoratorForData(PixivRequestSpace.searchIllusts, keywords)
+    }
+
+    getAuthorIllusts(id: string, iType ?: UserIllustsType) {
+        return this.decoratorForData(PixivRequestSpace.getAuthorIllusts, id, iType)
+    }
+
+    getAuthorInfo(id: string) {
+        return this.decoratorForData(PixivRequestSpace.getAuthorInfo, id)
+    }
 }
 
-const obj = new RPixiv({
-    host: '127.0.0.1',
-    port: 7890,
-});
 
-obj.getDayRanks('').then(res => {
-    console.log(res.data);
-});
+export * from './type'

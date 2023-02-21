@@ -11,15 +11,17 @@
 
 ## Table of Contents
 
-- [pixiv-server](#pixiv-server)
+- [pixiv-server-SDK](#pixiv-server-sdk)
   - [Table of Contents](#table-of-contents)
   - [Install](#install)
   - [Usage](#usage)
-      - [RPixiv 类](#RPixiv 类)
+    - [RPixiv 类](#rpixiv-类)
   - [API](#api)
-      - [getDayRanks(range ?: string)](getDayRanks(range ?: string))
-      - [getWeekRanks(range ?: string)](getWeekRanks(range ?: string))
-      - [getMonthRanks(range ?: string)](getMonthRanks(range ?: string))
+      - [getDayRanks(range ?: string)](#getdayranksrange--string)
+      - [getWeekRanks(range ?: string)](#getweekranksrange--string)
+      - [getMonthRanks(range ?: string)](#getmonthranksrange--string)
+      - [getAuthorIllusts(id: string, iType: 'illust' | 'manga')](#getauthorillustsid-string-itype-illust--manga)
+      - [getAuthorInfo(id: string)](#getauthorinfoid-string)
   - [Maintainers](#maintainers)
   - [License](#license)
 
@@ -88,7 +90,19 @@ await pixiv.getMonthRanks("2022-11-14")
 
 > 后续接口还在移植中
 
+#### getAuthorIllusts(id: string, iType: 'illust' | 'manga')
+* 获取Pixiv指定作者的作品，id是作者id号，iType用于指定是漫画作品还是插画作品，默认为漫画作品。
+* Get Pixiv author's works, the id is the author's id, and you can set the `iType` to specify the illust or mange, default is the illust.
+```typescript
+await pixiv.getAuthorIllusts("114514", "manga")
+```
 
+#### getAuthorInfo(id: string)
+* 获取pixiv指定作者的信息。
+* Get Pixiv author's infomation
+```ts
+await pixiv.getAuthorInfo("1919810")
+```
 
 ## Maintainers
 
