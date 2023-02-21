@@ -40,7 +40,6 @@ export const getAccessTokenCache = async (proxy: AxiosProxyConfig) => {
             JSON.stringify(result)
         )
     }
-    console.log('result', result)
 
     return result
 }

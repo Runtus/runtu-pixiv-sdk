@@ -8,8 +8,6 @@ export const init = async (proxy?: AxiosProxyConfig) => {
         console.log('登录失败，马上进行重复登录');
         result = await getAccessTokenCache(proxy);
     }
-
-    console.log('init 114514');
     return result;
 };
 

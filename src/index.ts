@@ -1,9 +1,10 @@
 import { PixivRequestSpace } from '@src/routers/index';
 import { init } from './init';
-import { AxiosProxyConfig } from 'axios';
-import { setProxy } from '@src/request/axios.pixiv.api';
+import { AxiosProxyConfig, AxiosRequestConfig } from 'axios';
+import { setProxy as setApiProxy } from '@src/request/axios.pixiv.api';
+import { setProxy as setUrlProxy } from '@src/request/getPixivStream'
 import { getAccessTokenCache } from '@src/routers/load';
-import { DecortorParamsFn, UserIllustsType } from './type'
+import { DecortorParamsFn, UserIllustsType, RPixivData } from './type'
 
 export class RPixiv {
     static TIMESTAMP = 60 * 1000 * 15; // 令牌15分钟有效
@@ -16,11 +17,12 @@ export class RPixiv {
 
     constructor(proxy?: AxiosProxyConfig) {
         this.proxy_config = proxy;
-        this.axiosInit();
+        this.axiosProxyInit();
     }
 
-    axiosInit() {
-        setProxy(this.proxy_config);
+    axiosProxyInit() {
+        setApiProxy(this.proxy_config);
+        setUrlProxy(this.proxy_config);
     }
 
     setAccessToken(token: string) {
@@ -48,7 +50,6 @@ export class RPixiv {
 
     async init() {
         const response = await init(this.proxy_config);
-        console.log(response.access_token)
         this.setAccessToken(response.access_token);
         this.setRefreshToken(response.refresh_token);
         this.setStartTime(new Date().getTime());
@@ -63,20 +64,21 @@ export class RPixiv {
         return fn(this.accessToken, ...params)
     }
 
+    // TODO 后续看有无最佳实践用范性来替代类型断言
     getDayRanks(range: string) {
-        return this.decoratorForData(PixivRequestSpace.getDayRanks, range);
+        return this.decoratorForData(PixivRequestSpace.getDayRanks, range) as Promise<RPixivData>
     }
 
     getWeekRanks(range: string) {
-        return this.decoratorForData(PixivRequestSpace.getWeekRanks, range);
+        return this.decoratorForData(PixivRequestSpace.getWeekRanks, range) as Promise<RPixivData>
     }
 
     getMonthRanks(range: string) {
-        return this.decoratorForData(PixivRequestSpace.getMonthRanks, range);
+        return this.decoratorForData(PixivRequestSpace.getMonthRanks, range) as Promise<RPixivData>
     }
 
     searchIllusts(keywords: string) {
-        return this.decoratorForData(PixivRequestSpace.searchIllusts, keywords)
+        return this.decoratorForData(PixivRequestSpace.searchIllusts, keywords) as Promise<RPixivData>
     }
 
     getAuthorIllusts(id: string, iType ?: UserIllustsType) {
@@ -85,6 +87,10 @@ export class RPixiv {
 
     getAuthorInfo(id: string) {
         return this.decoratorForData(PixivRequestSpace.getAuthorInfo, id)
+    }
+
+    getPixivUrlData(url: string, rType?: AxiosRequestConfig['responseType']) {
+        return PixivRequestSpace.getPixivUrlData(url, rType)
     }
 }
 

@@ -22,6 +22,7 @@
       - [getMonthRanks(range ?: string)](#getmonthranksrange--string)
       - [getAuthorIllusts(id: string, iType: 'illust' | 'manga')](#getauthorillustsid-string-itype-illust--manga)
       - [getAuthorInfo(id: string)](#getauthorinfoid-string)
+    - [TODO](#todo)
   - [Maintainers](#maintainers)
   - [License](#license)
 
@@ -103,6 +104,10 @@ await pixiv.getAuthorIllusts("114514", "manga")
 ```ts
 await pixiv.getAuthorInfo("1919810")
 ```
+
+
+### TODO
+1. 增加获取图片流的接口
 
 ## Maintainers
 
