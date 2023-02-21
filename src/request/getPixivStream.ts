@@ -1,21 +1,20 @@
 // 下载pixiv的图片
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosProxyConfig} from 'axios';
 import { getHost, getPort } from './proxy';
 
-axios.defaults.proxy = {
-    port: getPort(),
-    host: getHost(),
-};
+export const setProxy = (proxy: AxiosProxyConfig) => {
+    axios.defaults.proxy = proxy
+}
 
 const referer = 'https://app-api.pixiv.net/';
 
-export const getPicStream = async (url: string) => {
+export const getPic = async (url: string, rType ?: AxiosRequestConfig['responseType']) => {
     const stream = await axios({
         url,
         headers: {
             Referer: referer,
         },
-        responseType: 'stream',
+        responseType: rType,
     });
 
     if (stream.status === 200) {

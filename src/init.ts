@@ -1,11 +1,13 @@
-import { getAccessTokenCache } from '@src/routers/load'
+import { getAccessTokenCache } from '@src/routers/load';
+import { AxiosProxyConfig } from 'axios';
 
-export namespace Init {
-    export const tokenCache = async () => {
-        let result = await getAccessTokenCache()
-        while (result.refresh_token.length === 0) {
-            console.log('登录失败，马上进行重复登录')
-            result = await getAccessTokenCache()
-        }
+
+export const init = async (proxy?: AxiosProxyConfig) => {
+    let result = await getAccessTokenCache(proxy);
+    while (result.refresh_token.length === 0) {
+        console.log('登录失败，马上进行重复登录');
+        result = await getAccessTokenCache(proxy);
     }
-}
+    return result;
+};
+
