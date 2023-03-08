@@ -48,7 +48,7 @@ export class RPixiv {
         }
     }
 
-    async init() {
+    async token() {
         const response = await init(this.proxy_config);
         this.setAccessToken(response.access_token);
         this.setRefreshToken(response.refresh_token);
@@ -57,9 +57,6 @@ export class RPixiv {
 
     // 装饰器
     async decoratorForData (fn: DecortorParamsFn, ...params: any) {
-        if (!this.refreshToken) {
-            await this.init();
-        }
         await this.checkTime();
         return fn(this.accessToken, ...params)
     }
@@ -89,7 +86,7 @@ export class RPixiv {
         return this.decoratorForData(PixivRequestSpace.getAuthorInfo, id)
     }
 
-    getPixivUrlData(url: string, rType?: AxiosRequestConfig['responseType']) {
+    getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']) {
         return PixivRequestSpace.getPixivUrlData(url, rType)
     }
 }

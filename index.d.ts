@@ -186,7 +186,7 @@ declare class RPixiv {
     setRefreshToken(token: string): void;
     setStartTime(time: number): void;
     checkTime(): Promise<void>;
-    init(): Promise<void>;
+    token(): Promise<void>;
     decoratorForData(fn: DecortorParamsFn, ...params: any): Promise<any>;
     getDayRanks(range: string): Promise<RPixivData>;
     getWeekRanks(range: string): Promise<RPixivData>;
@@ -194,7 +194,7 @@ declare class RPixiv {
     searchIllusts(keywords: string): Promise<RPixivData>;
     getAuthorIllusts(id: string, iType?: UserIllustsType): Promise<any>;
     getAuthorInfo(id: string): Promise<any>;
-    getPixivUrlData(url: string, rType?: AxiosRequestConfig['responseType']): Promise<any>;
+    getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']): Promise<any>;
 }
 
 export { DecortorParamsFn, PixivPic, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };
