@@ -1,20 +1,14 @@
 import { Token } from '@src/request/token';
 import { AxiosProxyConfig } from 'axios';
 
-type Cache = {
-    access_token: string;
-    refresh_token: string;
-};
 
-export const getAccessTokenCache = async (proxy: AxiosProxyConfig) => {
-    const result: Cache = {
+export const getAccessTokenCache = async (proxy: AxiosProxyConfig, refresh_token: string) => {
+    const result = {
         access_token: '',
-        refresh_token: '',
     };
 
-    const res = await Token.refresh(proxy);
-    result.access_token = res.access_token;
-    result.refresh_token = res.refresh_token;
+    const res = await Token.access(refresh_token, proxy);
+    result.access_token = res.data.access_token;
 
     return result;
 };

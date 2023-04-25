@@ -5,11 +5,15 @@ import { setProxy as setApiProxy } from '@src/request/axios.pixiv.api';
 import { setProxy as setUrlProxy } from '@src/request/getPixivStream'
 import { getAccessTokenCache } from '@src/routers/load';
 import { DecortorParamsFn, UserIllustsType, RPixivData } from './type'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
 
 export class RPixiv {
     static TIMESTAMP = 60 * 1000 * 15; // 令牌15分钟有效
 
-    private accessToken: string ;
+    public accessToken: string ;
     private refreshToken: string;
     private startTime: number;
 
@@ -41,17 +45,23 @@ export class RPixiv {
 
     async checkTime() {
         const now = new Date().getTime();
-        if (now - this.startTime >= RPixiv.TIMESTAMP) {
-            const result = await getAccessTokenCache(this.proxy_config);
+        // 保证accesstoken有效以及时间没过期
+        if (now - this.startTime >= RPixiv.TIMESTAMP || !this.accessToken) {
+            const result = await getAccessTokenCache(this.proxy_config, this.refreshToken);
             this.setAccessToken(result.access_token);
             this.setStartTime(now);
         }
     }
 
     async token() {
-        const response = await init(this.proxy_config);
-        this.setAccessToken(response.access_token);
-        this.setRefreshToken(response.refresh_token);
+        console.log(process.env.REFRESH_TOKEN)
+        if (process.env.REFRESH_TOKEN) {
+            this.setRefreshToken(process.env.REFRESH_TOKEN)
+        } else {
+            const response = await init(this.proxy_config);
+            this.setAccessToken(response.access_token);
+            this.setRefreshToken(response.refresh_token)
+        }
         this.setStartTime(new Date().getTime());
     }
 

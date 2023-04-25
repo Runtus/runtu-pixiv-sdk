@@ -23,11 +23,10 @@ describe("RPixiv Test", async () => {
     //     })
     // })
 
-    it("Rpixiv author info request test", () => {
-        console.log("进入了测试，henshin")
-        pixiv.getAuthorInfo('15989854').then(res => {
-            expect(res.code).toBe(200)
-        })
+    it("Rpixiv author info request test", async (ctx) => {
+        const res = await pixiv.getAuthorInfo('15989854')
+        console.log(res)
+        expect(res.code).toBe(200)
 
     })
 })
