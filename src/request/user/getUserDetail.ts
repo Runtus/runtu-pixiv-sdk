@@ -4,6 +4,7 @@ import axios from '../axios.pixiv.api'
 import qs from 'qs'
 import { Header } from '@src/request/header'
 
+
 export const getAuthorInfo = async (id: string, access_token: string) => {
     const params = qs.stringify({
         user_id: id
