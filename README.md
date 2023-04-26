@@ -22,6 +22,7 @@
       - [getMonthRanks(range ?: string)](#getmonthranksrange--string)
       - [getAuthorIllusts(id: string, iType: 'illust' | 'manga')](#getauthorillustsid-string-itype-illust--manga)
       - [getAuthorInfo(id: string)](#getauthorinfoid-string)
+      - [getPixivStream(url: string, rType: AxiosRequestConfig\['responseType'\])](#getpixivstreamurl-string-rtype-axiosrequestconfigresponsetype)
     - [TODO](#todo)
   - [Maintainers](#maintainers)
   - [License](#license)
@@ -111,9 +112,16 @@ await pixiv.getAuthorIllusts("114514", "manga")
 await pixiv.getAuthorInfo("1919810")
 ```
 
+#### getPixivStream(url: string, rType: AxiosRequestConfig['responseType'])
+* 获取pixiv图片的数据流，rType用于制定图片流的类型，是`Axios`中的`responseType`类型，具体可参考[axios-config](http://www.axios-js.com/zh-cn/docs/#axios-config)
+
+```ts
+await pixiv.getPixivStream("https://114514.pixiv.com", "arraybuffer")
+```
 
 ### TODO
-1. 增加获取图片流的接口
+- [x] 增加获取图片流的接口
+- [ ] 对各个图片搜索接口实现翻页功能
 
 ## Maintainers
 
