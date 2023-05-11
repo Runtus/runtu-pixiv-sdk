@@ -162,6 +162,69 @@ declare type PixivPic = {
     url: string;
     author: string;
 };
+declare type Author = {
+    id: string;
+    name: string;
+    accrount: string;
+    profile_image_urls: {
+        medium?: string;
+    };
+    is_followed: boolean;
+    is_access_blocking_user: boolean;
+};
+declare type AuthorIllusts = {
+    user: Author;
+} & WebPixivType;
+declare type AuthorInfo = {
+    user: Author;
+    profile: {
+        webpage: any;
+        gender: string;
+        birth: string;
+        birth_day: number;
+        region: string;
+        address_id: number;
+        country_code: string;
+        job: string;
+        job_id: number;
+        total_follow_users: number;
+        total_mypixiv_users: number;
+        total_illusts: number;
+        total_manga: number;
+        total_novels: number;
+        total_illust_bookmarks_public: number;
+        total_illust_series: number;
+        total_novel_series: number;
+        background_image_url: string;
+        twitter_account: string;
+        twitter_url: string;
+        pawoo_url: string;
+        is_premium: boolean;
+        is_using_custom_profile_image: boolean;
+    };
+    profile_publicity: {
+        gender: string;
+        region: string;
+        birth_day: string;
+        birth_year: string;
+        job: string;
+        pawoo: boolean;
+    };
+    workspace: {
+        pc: string;
+        monitor: string;
+        tool: string;
+        scanner: string;
+        tablet: string;
+        mouse: string;
+        printer: string;
+        desktop: string;
+        music: string;
+        desk: string;
+        chair: string;
+        comment: string;
+    };
+};
 
 declare type RPixivData = {
     code: 200 | 400;
@@ -181,20 +244,92 @@ declare class RPixiv {
     private startTime;
     private proxy_config;
     constructor(proxy?: AxiosProxyConfig);
-    axiosProxyInit(): void;
-    setAccessToken(token: string): void;
-    setRefreshToken(token: string): void;
-    setStartTime(time: number): void;
+    private axiosProxyInit;
+    private setAccessToken;
+    private setRefreshToken;
+    private setStartTime;
     checkTime(): Promise<void>;
     token(): Promise<void>;
     decoratorForData(fn: DecortorParamsFn, ...params: any): Promise<any>;
-    getDayRanks(range: string): Promise<RPixivData>;
-    getWeekRanks(range: string): Promise<RPixivData>;
-    getMonthRanks(range: string): Promise<RPixivData>;
-    searchIllusts(keywords: string): Promise<RPixivData>;
-    getAuthorIllusts(id: string, iType?: UserIllustsType): Promise<any>;
-    getAuthorInfo(id: string): Promise<any>;
+    getDayRanks(range: string): Promise<{
+        illusts: {
+            id: string;
+            image_urls: {
+                large: string;
+                medium: string;
+                square_medium: string;
+            };
+            title: string;
+            user: {
+                id: string;
+                name: string;
+            };
+            meta_single_page: {
+                original_image_url: string;
+            };
+        }[];
+        date?: string;
+    }>;
+    getWeekRanks(range: string): Promise<{
+        illusts: {
+            id: string;
+            image_urls: {
+                large: string;
+                medium: string;
+                square_medium: string;
+            };
+            title: string;
+            user: {
+                id: string;
+                name: string;
+            };
+            meta_single_page: {
+                original_image_url: string;
+            };
+        }[];
+        date?: string;
+    }>;
+    getMonthRanks(range: string): Promise<{
+        illusts: {
+            id: string;
+            image_urls: {
+                large: string;
+                medium: string;
+                square_medium: string;
+            };
+            title: string;
+            user: {
+                id: string;
+                name: string;
+            };
+            meta_single_page: {
+                original_image_url: string;
+            };
+        }[];
+        date?: string;
+    }>;
+    searchIllusts(keywords: string): Promise<{
+        illusts: {
+            id: string;
+            image_urls: {
+                large: string;
+                medium: string;
+                square_medium: string;
+            };
+            title: string;
+            user: {
+                id: string;
+                name: string;
+            };
+            meta_single_page: {
+                original_image_url: string;
+            };
+        }[];
+        date?: string;
+    }>;
+    getAuthorIllusts(id: string, iType?: UserIllustsType): Promise<AuthorIllusts>;
+    getAuthorInfo(id: string): Promise<AuthorInfo>;
     getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']): Promise<any>;
 }
 
-export { DecortorParamsFn, PixivPic, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };
+export { Author, AuthorIllusts, AuthorInfo, DecortorParamsFn, PixivPic, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };

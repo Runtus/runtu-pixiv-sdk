@@ -23,8 +23,11 @@ export const getAccessToken = (refreshToken: string, proxy?: AxiosProxyConfig) =
         data: body,
         proxy
     };
-    return axios(options).catch(err => ({
-        info: err,
-        data: null
-    }))
+    return axios(options).catch(err => {
+        console.log("请检查refreshToken是否正确");
+        return {
+            info: '',
+            data: null
+        }
+    })
 };

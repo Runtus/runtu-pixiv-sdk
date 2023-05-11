@@ -33,7 +33,9 @@ const plugins = [
   }),
   // 根据tsconfig.json的情况进行打包
   ts({ tsconfig: './tsconfig.json', tsconfigOverride: override }),
+  // 将json文件转化为ES6-module
   json(),
+  // 将commonjs的格式转化为es6的格式
   commonjs(),
   esbuild({
     target: 'node14',
