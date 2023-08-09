@@ -2,7 +2,6 @@ import { PixivRequestSpace } from '@src/routers/index';
 import { init } from './init';
 import { AxiosProxyConfig, AxiosRequestConfig } from 'axios';
 import { setProxy as setApiProxy } from '@src/request/axios.pixiv.api';
-import { setProxy as setUrlProxy } from '@src/request/getPixivStream'
 import { getAccessTokenCache } from '@src/routers/load';
 import { DecortorParamsFn, UserIllustsType, RPixivData, AuthorIllusts, AuthorInfo } from './type'
 import * as dotenv from 'dotenv'
@@ -26,7 +25,6 @@ export class RPixiv {
 
     private axiosProxyInit() {
         setApiProxy(this.proxy_config);
-        setUrlProxy(this.proxy_config);
     }
 
     private setAccessToken(token: string) {
@@ -43,7 +41,7 @@ export class RPixiv {
 
 
 
-    async checkTime() {
+    private async checkTime() {
         const now = new Date().getTime();
         // 保证accesstoken有效以及时间没过期
         if (now - this.startTime >= RPixiv.TIMESTAMP || !this.accessToken) {
@@ -53,12 +51,12 @@ export class RPixiv {
         }
     }
 
-    async token() {
+    public async token() {
         console.log(process.env.REFRESH_TOKEN)
         if (process.env.REFRESH_TOKEN) {
             this.setRefreshToken(process.env.REFRESH_TOKEN)
         } else {
-            const response = await init(this.proxy_config);
+            const response = await init();
             this.setAccessToken(response.access_token);
             this.setRefreshToken(response.refresh_token)
         }
@@ -66,7 +64,7 @@ export class RPixiv {
     }
 
     // 装饰器
-    async decoratorForData (fn: DecortorParamsFn, ...params: any) {
+    private async decoratorForData (fn: DecortorParamsFn, ...params: any) {
         await this.checkTime();
         const result = await fn(this.accessToken, ...params)
         if (result.code === 400) {

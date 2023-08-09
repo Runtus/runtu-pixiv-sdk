@@ -1,6 +1,5 @@
 import { RankingMode, WebPixivType } from '../type';
-import { Header } from '../header';
-import axios from '../axios.pixiv.api';
+import { PixivAxios } from '../axios.pixiv.api';
 import moment from 'moment';
 import qs from 'qs';
 
@@ -20,13 +19,13 @@ export const getRanks = async (mode: RankingMode, access_token: string, range?: 
     })
 
     const options = {
-        url: `/illust/ranking?${params}`,
+        url: `${PixivAxios.APIV1.URL}/illust/ranking?${params}`,
         headers: {
-            ...Header,
+            ...PixivAxios.GeneralHeaders,
             Authorization: `Bearer ${access_token}`,
         },
     }
-    const response = await axios(options);
+    const response = await PixivAxios.pAxios(options);
     retry++;
     // 没请求到数据返回空
     if (response.status !== 200) {

@@ -1,17 +1,17 @@
-import axios, { AxiosProxyConfig, AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import { PixivAxios } from '../axios.pixiv.api'
 import { Header as headers } from '../header';
-import { PixivConst } from '@src/const';
 import qs from 'qs';
 
 // pixiv内置参数
 const URL = 'https://oauth.secure.pixiv.net/auth/token';
 
-export const getAccessToken = (refreshToken: string, proxy?: AxiosProxyConfig) => {
+export const getAccessToken = (refreshToken: string) => {
     const body = qs.stringify({
-        client_id: PixivConst.Token.CLIENT_ID,
-        client_secret: PixivConst.Token.CLIENT_SECRET,
+        client_id: PixivAxios.CLIENT_INFO.CLIENT_ID,
+        client_secret: PixivAxios.CLIENT_INFO.CLIENT_SECRET,
         grant_type: 'refresh_token',
-        hash_secret: PixivConst.Token.HASH_SECRET,
+        hash_secret: PixivAxios.CLIENT_INFO.HASH_SECRET,
         get_secure_url: 1,
         include_policy: true,
         refresh_token: refreshToken,
@@ -21,9 +21,8 @@ export const getAccessToken = (refreshToken: string, proxy?: AxiosProxyConfig) =
         url: URL,
         headers,
         data: body,
-        proxy
     };
-    return axios(options).catch(err => {
+    return PixivAxios.pAxios(options).catch(err => {
         console.log("请检查refreshToken是否正确");
         return {
             info: '',

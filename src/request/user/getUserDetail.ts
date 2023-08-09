@@ -1,6 +1,6 @@
 // /v1/user/detail  用户/画师主页信息
 
-import axios from '../axios.pixiv.api'
+import { PixivAxios } from '../axios.pixiv.api'
 import qs from 'qs'
 import { Header } from '@src/request/header'
 
@@ -10,8 +10,8 @@ export const getAuthorInfo = async (id: string, access_token: string) => {
         user_id: id
     })
 
-    const response = await axios({
-        url: `/user/detail?${params}`,
+    const response = await PixivAxios.pAxios({
+        url: `${PixivAxios.APIV1.URL}/user/detail?${params}`,
         headers: {
             ...Header,
             Authorization: `Bearer ${access_token}`,

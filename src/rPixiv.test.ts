@@ -3,7 +3,7 @@ import { RPixiv } from './'
 
 describe("RPixiv Test", async () => {
     const pixiv = new RPixiv({
-        host: "127.0.0.1",
+        host: "192.168.1.93",
         port: 7890
     })   
 
@@ -38,13 +38,7 @@ describe("RPixiv Test", async () => {
     //     const stream = await pixiv.getPixivStream("https://i.pximg.net/c/1200x600_90_a2_g5/background/img/2022/08/27/21/22/17/15989854_46f84d1f9fd8c74fc7e0222db46028ef_master1200.jpg", "arraybuffer")
     //     console.log(stream)
     //     expect(200).toBe(200)
-    // })
-
-
-
-
-
-    
+    // }
 
     
 })

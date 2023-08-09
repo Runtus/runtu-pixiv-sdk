@@ -1,6 +1,5 @@
-import axios from '../axios.pixiv.api'
+import  { PixivAxios } from '../axios.pixiv.api'
 import qs from 'qs'
-import { Header } from '../header'
 import { UserIllustsType } from '../type'
 
 export const getUserIllusts = async (id: string, type: UserIllustsType, access_token: string) => {
@@ -9,13 +8,12 @@ export const getUserIllusts = async (id: string, type: UserIllustsType, access_t
         type,
         filter: 'for_ios'
     })
-    
-    console.log('query', query)
-    const response = await axios({
+
+    const response = await PixivAxios.pAxios({
         method: "GET",
-        url: `/user/illusts?${query}`,
+        url: `${PixivAxios.APIV1.URL}/user/illusts?${query}`,
         headers: {
-            ...Header,
+            ...PixivAxios.GeneralHeaders,
             Authorization: `Bearer ${access_token}`,
         }
     }).catch(err => {
@@ -25,6 +23,6 @@ export const getUserIllusts = async (id: string, type: UserIllustsType, access_t
             data: {}
         }
     })
-    
+
     return response
 }

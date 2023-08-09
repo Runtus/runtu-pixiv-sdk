@@ -1,7 +1,6 @@
-import axios from '../axios.pixiv.api'
+import { PixivAxios } from '../axios.pixiv.api'
 import qs from 'qs'
 import { WebPixivType } from '../type'
-import { Header } from '@src/request/header'
 
 export const getKeywordsIllusts = async (keywords: string, access_token: string): Promise<WebPixivType> => {
     const params = qs.stringify({
@@ -9,10 +8,10 @@ export const getKeywordsIllusts = async (keywords: string, access_token: string)
         filter: 'for_ios',
         word: keywords
     })
-    const response = await axios({
-        url: `/search/popular-preview/illust?${params}`,
+    const response = await PixivAxios.pAxios({
+        url: `${PixivAxios.APIV1.URL}/search/popular-preview/illust?${params}`,
         headers: {
-            ...Header,
+            ...PixivAxios.GeneralHeaders,
             Authorization: `Bearer ${access_token}`,
         }
     })
