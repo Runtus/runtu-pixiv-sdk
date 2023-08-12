@@ -3,9 +3,10 @@
 import { PixivAxios } from '../axios.pixiv.api'
 import qs from 'qs'
 import { Header } from '@src/request/header'
+import { AuthorInfo, PixivResponse } from '../type'
 
 
-export const getAuthorInfo = async (id: string, access_token: string) => {
+export const getAuthorInfo: (id: string, access_token: string) => PixivResponse<AuthorInfo> = async (id, access_token) => {
     const params = qs.stringify({
         user_id: id
     })
@@ -15,12 +16,6 @@ export const getAuthorInfo = async (id: string, access_token: string) => {
         headers: {
             ...Header,
             Authorization: `Bearer ${access_token}`,
-        }
-    }).catch(err => {
-        console.error('请求出错，参数不正确', err)
-        return {
-            status: 400,
-            data: {}
         }
     })
 

@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import qs from 'qs';
 import readline from 'readline-sync';
 import { PixivAxios } from '../axios.pixiv.api'
+import { PixivToken, PixivResponse } from '../type'
 
 const REDIRECT_URI = 'https://app-api.pixiv.net/web/v1/users/auth/pixiv/callback';
 
@@ -16,7 +17,7 @@ type RefreshResponse = {
     refresh_token: string;
 };
 
-export const getRefreshToken = async () => {
+export const getRefreshToken: () => PixivResponse<PixivToken> = async () => {
     const code_verifier = tokenBase64(32);
     const code_challenge = crypto.createHash('sha256').update(code_verifier).digest('base64').split('/').join('_').split('+').join('-').split('=').join('');
     const login_params = {
@@ -58,17 +59,7 @@ export const getRefreshToken = async () => {
         headers: {
             ...PixivAxios.GeneralHeaders
         },
-    }).catch(err => {
-        console.log('RefreshToken获取失败，请检查是否正确输入浏览器中的token', err);
-        return {
-            data: {
-                refresh_token: '',
-                access_token: '',
-            },
-        };
     });
 
-    console.log(res.data)
-
-    return res.data as RefreshResponse;
+    return res;
 };

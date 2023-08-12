@@ -57,8 +57,8 @@ export class RPixiv {
             this.setRefreshToken(process.env.REFRESH_TOKEN)
         } else {
             const response = await init();
-            this.setAccessToken(response.access_token);
-            this.setRefreshToken(response.refresh_token)
+            this.setAccessToken(response.data.access_token);
+            this.setRefreshToken(response.data.refresh_token)
         }
         this.setStartTime(new Date().getTime());
     }

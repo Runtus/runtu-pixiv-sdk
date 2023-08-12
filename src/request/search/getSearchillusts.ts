@@ -1,8 +1,8 @@
 import { PixivAxios } from '../axios.pixiv.api'
 import qs from 'qs'
-import { WebPixivType } from '../type'
+import { WebPixivType, PixivResponse } from '../type'
 
-export const getKeywordsIllusts = async (keywords: string, access_token: string): Promise<WebPixivType> => {
+export const getKeywordsIllusts: (k: string, a: string) => PixivResponse<WebPixivType> = async (keywords, access_token) => {
     const params = qs.stringify({
         search_target: 'partial_match_for_tags',
         filter: 'for_ios',
@@ -16,13 +16,5 @@ export const getKeywordsIllusts = async (keywords: string, access_token: string)
         }
     })
     
-    if (response.status === 200) {
-        return response.data
-    } else {
-        console.error('请求异常')
-        return {
-            illusts: [],
-            next_url: ''
-        }
-    }
+    return response
 }

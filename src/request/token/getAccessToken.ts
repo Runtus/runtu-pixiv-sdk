@@ -2,11 +2,12 @@ import { AxiosRequestConfig } from 'axios';
 import { PixivAxios } from '../axios.pixiv.api'
 import { Header as headers } from '../header';
 import qs from 'qs';
+import { PixivResponse, PixivToken } from '../type';
 
 // pixiv内置参数
 const URL = 'https://oauth.secure.pixiv.net/auth/token';
 
-export const getAccessToken = (refreshToken: string) => {
+export const getAccessToken: (refreshToken: string) => PixivResponse<PixivToken> = (refreshToken) => {
     const body = qs.stringify({
         client_id: PixivAxios.CLIENT_INFO.CLIENT_ID,
         client_secret: PixivAxios.CLIENT_INFO.CLIENT_SECRET,
@@ -22,11 +23,5 @@ export const getAccessToken = (refreshToken: string) => {
         headers,
         data: body,
     };
-    return PixivAxios.pAxios(options).catch(err => {
-        console.log("请检查refreshToken是否正确");
-        return {
-            info: '',
-            data: null
-        }
-    })
+    return PixivAxios.pAxios(options)
 };

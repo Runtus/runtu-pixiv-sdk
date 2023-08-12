@@ -1,5 +1,5 @@
-import axios, {AxiosProxyConfig} from 'axios'
-import { PixivConst } from '@src/const'
+import axios, {AxiosProxyConfig, AxiosResponse, AxiosPromise} from 'axios'
+import { PixivConst, STATUS_CODE } from '@src/const'
 
 export const setProxy = (proxy?: AxiosProxyConfig) => {
     if (proxy) {
@@ -8,6 +8,22 @@ export const setProxy = (proxy?: AxiosProxyConfig) => {
         }  
     }
 }
+
+
+// 如何更改AxiosReponse的返回类型
+axios.interceptors.response.use((res) => {
+    return {
+        status: STATUS_CODE.SUCCESS,
+        data:  res.data
+    };
+}, (err) => {
+    console.error(err);
+    return {
+        status: STATUS_CODE.FAILED,
+        data: null,
+        err
+    }
+})
 
 
 
@@ -34,5 +50,8 @@ export namespace PixivAxios {
     export namespace AUTH_TOKEN {
         export const URL = 'https://oauth.secure.pixiv.net/auth/token';
     }
+
+    export type PAxiosResponse = AxiosResponse
+    export type PAxiosPromise = AxiosPromise
 
 }
