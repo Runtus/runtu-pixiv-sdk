@@ -1,8 +1,8 @@
 import  { PixivAxios } from '../axios.pixiv.api'
 import qs from 'qs'
-import { UserIllustsType } from '../type'
+import { UserIllustsType, PixivResponse, AuthorIllusts  } from '../type'
 
-export const getUserIllusts = async (id: string, type: UserIllustsType, access_token: string) => {
+export const getUserIllusts: (id: string, type: UserIllustsType, access_token: string) => PixivResponse<AuthorIllusts> = async (id, type, access_token) => {
     const query = qs.stringify({
         user_id: id,
         type,
@@ -15,12 +15,6 @@ export const getUserIllusts = async (id: string, type: UserIllustsType, access_t
         headers: {
             ...PixivAxios.GeneralHeaders,
             Authorization: `Bearer ${access_token}`,
-        }
-    }).catch(err => {
-        console.error('请求出错，参数不正确', err)
-        return {
-            status: 400,
-            data: {}
         }
     })
 

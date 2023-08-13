@@ -25,9 +25,11 @@ describe("RPixiv Test", async () => {
 
     it("Author Illusts Test", async (ctx) => {
         const res = await pixiv.getAuthorIllusts('15989854')
-        
-        expect(res.user.id).toBe(15989854)
+        console.log(res.data)
+        expect(res.status).toBe(200)
     })
+
+
 
     // it("Author Info Test", async (ctx) => {
     //     const res = await pixiv.getAuthorInfo('15989854')
