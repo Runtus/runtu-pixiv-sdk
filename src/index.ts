@@ -3,7 +3,7 @@ import { init } from './init';
 import { AxiosProxyConfig, AxiosRequestConfig } from 'axios';
 import { setProxy as setApiProxy } from '@src/request/axios.pixiv.api';
 import { getAccessTokenCache } from '@src/routers/load';
-import { DecortorParamsFn, UserIllustsType, RPixivData, AuthorIllusts, AuthorInfo, PixivResponse, WebPixivType } from './type'
+import { DecortorParamsFn, UserIllustsType } from './type'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
@@ -70,16 +70,16 @@ export class RPixiv {
     }
 
     // TODO 后续看有无最佳实践用范性来替代类型断言
-    async getDayRanks(range: string) {
-        return await this.decoratorForData(PixivRequestSpace.getDayRanks, range)
+    async getDayRanks(offset: string) {
+        return await this.decoratorForData(PixivRequestSpace.getDayRanks, offset)
     }
 
-    async getWeekRanks(range: string) {
-        return await this.decoratorForData(PixivRequestSpace.getWeekRanks, range)
+    async getWeekRanks(offset: string) {
+        return await this.decoratorForData(PixivRequestSpace.getWeekRanks, offset)
     }
 
-    async getMonthRanks(range: string) {
-        return await this.decoratorForData(PixivRequestSpace.getMonthRanks, range)
+    async getMonthRanks(offset: string) {
+        return await this.decoratorForData(PixivRequestSpace.getMonthRanks, offset)
     }
 
     async searchIllusts(keywords: string) {

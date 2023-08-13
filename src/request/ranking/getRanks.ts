@@ -10,12 +10,11 @@ type RanksIllusts = {
 
 let retry = 0;
 // range为用户指定的时间
-export const getRanks: (mode: RankingMode, t: string, r ?: string) => PixivResponse<WebPixivType> = async (mode, access_token, range)=> {
-    const date = range ? moment(range).format('YYYY-MM-DD') : moment().subtract(1, 'days').format('YYYY-MM-DD');
+export const getRanks: (mode: RankingMode, t: string,  offset ?: string) => PixivResponse<WebPixivType> = async (mode, access_token, offset)=> {
     const params = qs.stringify({
         mode,
         filter: 'for_ios',
-        date,
+        offset,
     })
 
     const options = {

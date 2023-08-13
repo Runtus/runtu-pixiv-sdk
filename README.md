@@ -70,31 +70,35 @@ proxy: {
 
 
 ## API
-#### getDayRanks(range ?: string)
+#### getDayRanks(offset ?: string)
 * 获取Pixiv每日的插画排行榜数据。
 * Get Pixiv daily monthly illustration ranking data
 
+* `offset`参数用于获取更多的每日插画排行榜数据，**缺省为0，并且只能为30的倍数**。
+
 ```typescript
-await pixiv.getDayRanks("2022-11-11")
+await pixiv.getDayRanks("30")
 ```
 
-#### getWeekRanks(range ?: string)
+#### getWeekRanks(offset ?: string)
 * 获取Pixiv每周的插画排行榜数据。
 * Get Pixiv weekly illustration ranking data
 
 ````typescript
-await pixiv.getWeekRanks("2022-11-14")
+await pixiv.getWeekRanks("60")
 ````
+* `offset`参数用于获取更多的每日插画排行榜数据，**缺省为0，并且只能为30的倍数**。
 
 
-
-#### getMonthRanks(range ?: string)
+#### getMonthRanks(offset ?: string)
 * 获取Pixiv每月的插画排行榜数据。
 * Get Pixiv weekly monthly ranking data
 
+
 ```typescript
-await pixiv.getMonthRanks("2022-11-14")
+await pixiv.getMonthRanks("30")
 ```
+* `offset`参数用于获取更多的每日插画排行榜数据，**缺省为0，并且只能为30的倍数**。
 
 > 后续接口还在移植中
 
