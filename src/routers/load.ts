@@ -7,7 +7,7 @@ export const getAccessTokenCache = async (proxy: AxiosProxyConfig, refresh_token
         access_token: '',
     };
 
-    const res = await Token.access(refresh_token, proxy);
+    const res = await Token.access(refresh_token);
     if (!res.data) {
         throw new Error("Refreshtoken Incorrect!");
     }

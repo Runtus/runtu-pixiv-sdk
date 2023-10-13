@@ -1,3 +1,8 @@
+declare enum STATUS_CODE {
+    SUCCESS = 200,
+    FAILED = 400
+}
+
 // TypeScript Version: 3.0
 
 type AxiosRequestHeaders = Record<string, string | number | boolean>;
@@ -136,46 +141,21 @@ declare enum RankingMode {
     WEEK = "week",
     MONTH = "month"
 }
-declare type UserIllustsType = 'manga' | 'illust';
-declare type WebPixivType = {
-    illusts: Array<{
-        id: string;
-        image_urls: {
-            large: string;
-            medium: string;
-            square_medium: string;
-        };
-        title: string;
-        user: {
-            id: string;
-            name: string;
-        };
-        meta_single_page: {
-            original_image_url: string;
-        };
-    }>;
-    next_url: string;
-};
-declare type PixivPic = {
-    title: string;
-    id: string;
-    url: string;
-    author: string;
-};
-declare type Author = {
+type UserIllustsType = 'manga' | 'illust';
+type Author = {
     id: string;
     name: string;
-    accrount: string;
+    account: string;
     profile_image_urls: {
         medium?: string;
     };
     is_followed: boolean;
-    is_access_blocking_user: boolean;
+    is_access_blocking_user?: boolean;
 };
-declare type AuthorIllusts = {
+type AuthorIllusts = {
     user: Author;
 } & WebPixivType;
-declare type AuthorInfo = {
+type AuthorInfo = {
     user: Author;
     profile: {
         webpage: any;
@@ -225,8 +205,74 @@ declare type AuthorInfo = {
         comment: string;
     };
 };
+type Illust = {
+    id: number;
+    title: string;
+    type: string;
+    image_urls: {
+        large: string;
+        medium: string;
+        square_medium: string;
+    };
+    caption: string;
+    restrict: number;
+    user: Author;
+    tags: Array<{
+        name: string;
+        translated_name: string | null;
+    }>;
+    tools: Array<any>;
+    create_date: string;
+    page_count: number;
+    width: number;
+    height: number;
+    sanity_level: number;
+    x_restrict: number;
+    series: Object;
+    meta_single_page: {
+        original_image_url: string;
+    };
+    meta_pages: Array<any>;
+    total_view: number;
+    total_bookmarks: number;
+    is_bookmarked: boolean;
+    visible: boolean;
+    is_muted: boolean;
+    illust_ai_type: number;
+    illust_book_style: number;
+};
+type WebPixivType = {
+    illusts: Array<Illust>;
+    next_url?: string;
+};
+type PixivPic = {
+    title: string;
+    id: string;
+    url: string;
+    author: string;
+};
+type PixivResponse<T> = Promise<{
+    status: STATUS_CODE;
+    data: T;
+    err?: any;
+}>;
+type PixivToken = {
+    access_token: string;
+    expires_in: number;
+    token_type: string;
+    scpoe: string;
+    refresh_token: string;
+    user: Author & {
+        mail_address: string;
+        is_premium: boolean;
+        x_restrict: number;
+        is_mail_authorized: boolean;
+        require_policy_agreement: boolean;
+    };
+    response: PixivToken;
+};
 
-declare type RPixivData = {
+type RPixivData = {
     code: 200 | 400;
     data: {
         illusts: WebPixivType['illusts'];
@@ -235,7 +281,7 @@ declare type RPixivData = {
     info: string;
 };
 
-declare type DecortorParamsFn = (token: string, ...params: any[]) => any;
+type DecortorParamsFn<T> = (token: string, ...params: any[]) => T;
 
 declare class RPixiv {
     static TIMESTAMP: number;
@@ -248,88 +294,40 @@ declare class RPixiv {
     private setAccessToken;
     private setRefreshToken;
     private setStartTime;
-    checkTime(): Promise<void>;
+    private checkTime;
     token(): Promise<void>;
-    decoratorForData(fn: DecortorParamsFn, ...params: any): Promise<any>;
+    private decoratorForData;
     getDayRanks(range: string): Promise<{
-        illusts: {
-            id: string;
-            image_urls: {
-                large: string;
-                medium: string;
-                square_medium: string;
-            };
-            title: string;
-            user: {
-                id: string;
-                name: string;
-            };
-            meta_single_page: {
-                original_image_url: string;
-            };
-        }[];
-        date?: string;
+        status: STATUS_CODE;
+        data: WebPixivType;
+        err?: any;
     }>;
     getWeekRanks(range: string): Promise<{
-        illusts: {
-            id: string;
-            image_urls: {
-                large: string;
-                medium: string;
-                square_medium: string;
-            };
-            title: string;
-            user: {
-                id: string;
-                name: string;
-            };
-            meta_single_page: {
-                original_image_url: string;
-            };
-        }[];
-        date?: string;
+        status: STATUS_CODE;
+        data: WebPixivType;
+        err?: any;
     }>;
     getMonthRanks(range: string): Promise<{
-        illusts: {
-            id: string;
-            image_urls: {
-                large: string;
-                medium: string;
-                square_medium: string;
-            };
-            title: string;
-            user: {
-                id: string;
-                name: string;
-            };
-            meta_single_page: {
-                original_image_url: string;
-            };
-        }[];
-        date?: string;
+        status: STATUS_CODE;
+        data: WebPixivType;
+        err?: any;
     }>;
     searchIllusts(keywords: string): Promise<{
-        illusts: {
-            id: string;
-            image_urls: {
-                large: string;
-                medium: string;
-                square_medium: string;
-            };
-            title: string;
-            user: {
-                id: string;
-                name: string;
-            };
-            meta_single_page: {
-                original_image_url: string;
-            };
-        }[];
-        date?: string;
+        status: STATUS_CODE;
+        data: WebPixivType;
+        err?: any;
     }>;
-    getAuthorIllusts(id: string, iType?: UserIllustsType): Promise<AuthorIllusts>;
-    getAuthorInfo(id: string): Promise<AuthorInfo>;
+    getAuthorIllusts(id: string, iType?: UserIllustsType): Promise<{
+        status: STATUS_CODE;
+        data: AuthorIllusts;
+        err?: any;
+    }>;
+    getAuthorInfo(id: string): Promise<{
+        status: STATUS_CODE;
+        data: AuthorInfo;
+        err?: any;
+    }>;
     getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']): Promise<any>;
 }
 
-export { Author, AuthorIllusts, AuthorInfo, DecortorParamsFn, PixivPic, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };
+export { Author, AuthorIllusts, AuthorInfo, DecortorParamsFn, Illust, PixivPic, PixivResponse, PixivToken, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };
