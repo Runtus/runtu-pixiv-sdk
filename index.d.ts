@@ -3,6 +3,171 @@ declare enum STATUS_CODE {
     FAILED = 400
 }
 
+declare enum RankingMode {
+    DAY = "day",
+    WEEK = "week",
+    MONTH = "month"
+}
+type UserIllustsType = 'manga' | 'illust';
+/** 通过API获得的相关数据的数据类型 */
+type Author = {
+    id: string;
+    name: string;
+    account: string;
+    profile_image_urls: {
+        medium?: string;
+    };
+    is_followed: boolean;
+    is_access_blocking_user?: boolean;
+};
+type AuthorIllusts = {
+    user: Author;
+} & WebPixivType;
+type AuthorInfo = {
+    user: Author;
+    profile: {
+        webpage: any;
+        gender: string;
+        birth: string;
+        birth_day: number;
+        region: string;
+        address_id: number;
+        country_code: string;
+        job: string;
+        job_id: number;
+        total_follow_users: number;
+        total_mypixiv_users: number;
+        total_illusts: number;
+        total_manga: number;
+        total_novels: number;
+        total_illust_bookmarks_public: number;
+        total_illust_series: number;
+        total_novel_series: number;
+        background_image_url: string;
+        twitter_account: string;
+        twitter_url: string;
+        pawoo_url: string;
+        is_premium: boolean;
+        is_using_custom_profile_image: boolean;
+    };
+    profile_publicity: {
+        gender: string;
+        region: string;
+        birth_day: string;
+        birth_year: string;
+        job: string;
+        pawoo: boolean;
+    };
+    workspace: {
+        pc: string;
+        monitor: string;
+        tool: string;
+        scanner: string;
+        tablet: string;
+        mouse: string;
+        printer: string;
+        desktop: string;
+        music: string;
+        desk: string;
+        chair: string;
+        comment: string;
+    };
+};
+type Illust = {
+    id: number;
+    title: string;
+    type: string;
+    image_urls: {
+        large: string;
+        medium: string;
+        square_medium: string;
+    };
+    caption: string;
+    restrict: number;
+    user: Author;
+    tags: Array<{
+        name: string;
+        translated_name: string | null;
+    }>;
+    tools: Array<any>;
+    create_date: string;
+    page_count: number;
+    width: number;
+    height: number;
+    sanity_level: number;
+    x_restrict: number;
+    series: Object;
+    meta_single_page: {
+        original_image_url: string;
+    };
+    meta_pages: Array<Illust["image_urls"] & Illust["meta_single_page"]>;
+    total_view: number;
+    total_bookmarks: number;
+    is_bookmarked: boolean;
+    visible: boolean;
+    is_muted: boolean;
+    illust_ai_type: number;
+    illust_book_style: number;
+};
+type WebPixivType = {
+    illusts: Array<Illust>;
+    next_url?: string;
+};
+type PixivPic = {
+    title: string;
+    id: string;
+    url: string;
+    author: string;
+};
+type PixivResponse<T> = Promise<{
+    status: STATUS_CODE;
+    data: T;
+    err?: any;
+}>;
+type PixivToken = {
+    access_token: string;
+    expires_in: number;
+    token_type: string;
+    scpoe: string;
+    refresh_token: string;
+    user: Author & {
+        mail_address: string;
+        is_premium: boolean;
+        x_restrict: number;
+        is_mail_authorized: boolean;
+        require_policy_agreement: boolean;
+    };
+    response: PixivToken;
+};
+/** 通过Web爬虫获取到的数据的相关数据类型 */
+type IllustWeb = {
+    id: string;
+    title: string;
+    description: string;
+    createDate: string;
+    updateDate: string;
+    image_urls: {
+        regular: string;
+        original: string;
+    };
+    author: {
+        id: string;
+        name: string;
+    };
+    tags: Array<string>;
+};
+
+type RPixivData = {
+    code: 200 | 400;
+    data: {
+        illusts: WebPixivType['illusts'];
+        date?: string;
+    };
+    info: string;
+};
+
+type DecortorParamsFn<T> = (token: string, ...params: any[]) => T;
+
 // TypeScript Version: 3.0
 
 type AxiosRequestHeaders = Record<string, string | number | boolean>;
@@ -136,153 +301,6 @@ interface CancelToken {
   throwIfRequested(): void;
 }
 
-declare enum RankingMode {
-    DAY = "day",
-    WEEK = "week",
-    MONTH = "month"
-}
-type UserIllustsType = 'manga' | 'illust';
-type Author = {
-    id: string;
-    name: string;
-    account: string;
-    profile_image_urls: {
-        medium?: string;
-    };
-    is_followed: boolean;
-    is_access_blocking_user?: boolean;
-};
-type AuthorIllusts = {
-    user: Author;
-} & WebPixivType;
-type AuthorInfo = {
-    user: Author;
-    profile: {
-        webpage: any;
-        gender: string;
-        birth: string;
-        birth_day: number;
-        region: string;
-        address_id: number;
-        country_code: string;
-        job: string;
-        job_id: number;
-        total_follow_users: number;
-        total_mypixiv_users: number;
-        total_illusts: number;
-        total_manga: number;
-        total_novels: number;
-        total_illust_bookmarks_public: number;
-        total_illust_series: number;
-        total_novel_series: number;
-        background_image_url: string;
-        twitter_account: string;
-        twitter_url: string;
-        pawoo_url: string;
-        is_premium: boolean;
-        is_using_custom_profile_image: boolean;
-    };
-    profile_publicity: {
-        gender: string;
-        region: string;
-        birth_day: string;
-        birth_year: string;
-        job: string;
-        pawoo: boolean;
-    };
-    workspace: {
-        pc: string;
-        monitor: string;
-        tool: string;
-        scanner: string;
-        tablet: string;
-        mouse: string;
-        printer: string;
-        desktop: string;
-        music: string;
-        desk: string;
-        chair: string;
-        comment: string;
-    };
-};
-type Illust = {
-    id: number;
-    title: string;
-    type: string;
-    image_urls: {
-        large: string;
-        medium: string;
-        square_medium: string;
-    };
-    caption: string;
-    restrict: number;
-    user: Author;
-    tags: Array<{
-        name: string;
-        translated_name: string | null;
-    }>;
-    tools: Array<any>;
-    create_date: string;
-    page_count: number;
-    width: number;
-    height: number;
-    sanity_level: number;
-    x_restrict: number;
-    series: Object;
-    meta_single_page: {
-        original_image_url: string;
-    };
-    meta_pages: Array<any>;
-    total_view: number;
-    total_bookmarks: number;
-    is_bookmarked: boolean;
-    visible: boolean;
-    is_muted: boolean;
-    illust_ai_type: number;
-    illust_book_style: number;
-};
-type WebPixivType = {
-    illusts: Array<Illust>;
-    next_url?: string;
-};
-type PixivPic = {
-    title: string;
-    id: string;
-    url: string;
-    author: string;
-};
-type PixivResponse<T> = Promise<{
-    status: STATUS_CODE;
-    data: T;
-    err?: any;
-}>;
-type PixivToken = {
-    access_token: string;
-    expires_in: number;
-    token_type: string;
-    scpoe: string;
-    refresh_token: string;
-    user: Author & {
-        mail_address: string;
-        is_premium: boolean;
-        x_restrict: number;
-        is_mail_authorized: boolean;
-        require_policy_agreement: boolean;
-    };
-    response: PixivToken;
-};
-
-type RPixivData = {
-    code: 200 | 400;
-    data: {
-        illusts: WebPixivType['illusts'];
-        date?: string;
-    };
-    info: string;
-};
-
-type DecortorParamsFn<T> = (token: string, ...params: any[]) => T;
-
 declare class RPixiv {
     static TIMESTAMP: number;
     private accessToken;
@@ -317,6 +335,11 @@ declare class RPixiv {
         data: WebPixivType;
         err?: any;
     }>;
+    searchIllustsById(id: string): Promise<{
+        status: STATUS_CODE;
+        data: IllustWeb;
+        err?: any;
+    }>;
     getAuthorIllusts(id: string, iType?: UserIllustsType): Promise<{
         status: STATUS_CODE;
         data: AuthorIllusts;
@@ -330,4 +353,4 @@ declare class RPixiv {
     getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']): Promise<any>;
 }
 
-export { Author, AuthorIllusts, AuthorInfo, DecortorParamsFn, Illust, PixivPic, PixivResponse, PixivToken, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };
+export { Author, AuthorIllusts, AuthorInfo, DecortorParamsFn, Illust, IllustWeb, PixivPic, PixivResponse, PixivToken, RPixiv, RPixivData, RankingMode, UserIllustsType, WebPixivType };
