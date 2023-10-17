@@ -8,7 +8,6 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-
 export class RPixiv {
     static TIMESTAMP = 60 * 1000 * 15; // 令牌15分钟有效
 
@@ -52,7 +51,6 @@ export class RPixiv {
     }
 
     public async token() {
-        console.log(process.env.REFRESH_TOKEN)
         if (process.env.REFRESH_TOKEN) {
             this.setRefreshToken(process.env.REFRESH_TOKEN)
         } else {
@@ -86,6 +84,10 @@ export class RPixiv {
         return await this.decoratorForData(PixivRequestSpace.searchIllusts, keywords)
     }
 
+    async searchIllustsById(id: string) {
+        return await this.decoratorForData(PixivRequestSpace.searchIllustsById, id)
+    }
+
     async getAuthorIllusts(id: string, iType ?: UserIllustsType) {
         return await this.decoratorForData(PixivRequestSpace.getAuthorIllusts, id, iType)
     }
@@ -97,6 +99,8 @@ export class RPixiv {
     async getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']) {
         return await PixivRequestSpace.getPixivUrlData(url, rType)
     }
+
+
 }
 
 

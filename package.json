@@ -23,6 +23,7 @@
         "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
         "test": "vitest",
         "format": "prettier --write .",
+        "changeLog":"conventional-changelog -p angular -i CHANGELOG.md -s",
         "build": "rollup -c && cp node_modules/readline-sync/lib/read.sh ./dist/read.sh && cp node_modules/readline-sync/lib/read.ps1 ./dist/read.ps1",
         "pub": "yarn build && bump && npm publish"
     },
@@ -31,6 +32,7 @@
         "@types/readline-sync": "^1.4.4",
         "axios": "^0.26.1",
         "base64url": "^3.0.1",
+        "cheerio": "^1.0.0-rc.12",
         "dotenv": "^16.0.3",
         "got": "^11.0.0",
         "moment": "^2.29.3",
@@ -47,6 +49,7 @@
         "@types/node": "^16.11.12",
         "@typescript-eslint/eslint-plugin": "^5.6.0",
         "@typescript-eslint/parser": "^5.6.0",
+        "cz-conventional-changelog": "^3.3.0",
         "eslint": "^8.4.1",
         "eslint-config-prettier": "^8.3.0",
         "nodemon": "^2.0.18",
@@ -58,5 +61,10 @@
         "ts-node": "^10.4.0",
         "tsconfig-paths": "^3.12.0",
         "typescript": "^4.5.2"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }

@@ -9,6 +9,10 @@ export const setProxy = (proxy?: AxiosProxyConfig) => {
     }
 }
 
+// axios.defaults.proxy = {
+//     host: "127.0.0.1",
+//     port: 7890
+// }
 
 // 如何更改AxiosReponse的返回类型
 axios.interceptors.response.use((res) => {
@@ -33,6 +37,11 @@ export namespace PixivAxios {
         'Content-Type': PixivConst.Request.CONTENT_TYPE,
     }
 
+    export const WebHeaders = {
+        'Content-Type': "text/html; charset=UTF-8",
+        'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+    }
+
     export const pAxios = axios;
 
     export const CLIENT_INFO = {
@@ -49,6 +58,10 @@ export namespace PixivAxios {
 
     export namespace AUTH_TOKEN {
         export const URL = 'https://oauth.secure.pixiv.net/auth/token';
+    }
+
+    export namespace WEB_URL {
+        export const URL = "https://www.pixiv.net"
     }
 
     export type PAxiosResponse = AxiosResponse

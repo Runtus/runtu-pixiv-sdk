@@ -3,30 +3,16 @@ import { RPixiv } from './'
 
 describe("RPixiv Test", async () => {
     const pixiv = new RPixiv({
-        host: "192.168.1.93",
+        host: "127.0.0.1",
         port: 7890
     })   
 
     await pixiv.token()
 
-    // it("Rpixiv Test", () => {
-    //     console.log(114514)
-    //     const obj = new RPixiv({
-    //         host: "127.0.0.1",
-    //         port: 7890
-    //     })   
-
-
-    //     obj.getDayRanks("").then(res => {
-    //         console.log(res.data.illusts)
-    //         expect(!!res.data.illusts.length).toBe(true)
-    //     })
-    // })
-
-    it("Author Illusts Test", async (ctx) => {
-        const res = await pixiv.getAuthorIllusts('15989854')
-        console.log(res.data)
-        expect(res.status).toBe(200)
+    it("Search Illust By Id", async (ctx) => {
+        const res = await pixiv.searchIllustsById("");
+        console.log("res", res);
+        expect(res.status).toBe(200);
     })
 
 
@@ -41,6 +27,4 @@ describe("RPixiv Test", async () => {
     //     console.log(stream)
     //     expect(200).toBe(200)
     // }
-
-    
 })

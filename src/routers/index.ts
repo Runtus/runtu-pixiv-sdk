@@ -1,5 +1,5 @@
 import { DayRanks, WeekRanks, MonthRanks } from './ranking';
-import { searchIllusts } from './search'
+import { searchIllusts, searchIllustsById } from './search'
 import { getUserInfo } from './user'
 import { getPixivUrlData } from './url'
 
@@ -8,13 +8,10 @@ export const PixivRequestSpace = {
     getWeekRanks: WeekRanks,
     getMonthRanks: MonthRanks,
     searchIllusts,
+    searchIllustsById,
     getPixivUrlData,
     getAuthorIllusts: getUserInfo.illusts,
     getAuthorInfo: getUserInfo.details
 }
-
-
-
-
 
 

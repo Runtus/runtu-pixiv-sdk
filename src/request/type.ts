@@ -9,6 +9,7 @@ export enum RankingMode {
 // 作者作品类型： 漫画 | 插画
 export type UserIllustsType = 'manga' | 'illust';
 
+/** 通过API获得的相关数据的数据类型 */
 // 作者概览信息类型
 export type Author = {
     id: string;
@@ -105,7 +106,7 @@ export type Illust = {
     meta_single_page: {
         original_image_url: string,
     },
-    meta_pages: Array<any>,
+    meta_pages: Array<Illust["image_urls"] & Illust["meta_single_page"]>,
     total_view: number,
     total_bookmarks: number,
     is_bookmarked: boolean,
@@ -153,4 +154,22 @@ export type PixivToken = {
         require_policy_agreement: boolean
     },
     response: PixivToken
+}
+
+/** 通过Web爬虫获取到的数据的相关数据类型 */
+export type IllustWeb = {
+    id: string,
+    title: string,
+    description: string,
+    createDate: string,
+    updateDate: string,
+    image_urls: {
+        regular: string,
+        original: string
+    },
+    author: {
+        id: string,
+        name: string
+    },
+    tags: Array<string>
 }

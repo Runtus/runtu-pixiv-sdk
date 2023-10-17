@@ -6,3 +6,7 @@ export const Header = {
 };
 
 
+export const WebHeader = {
+    "Content-Type": "text/html; charset=UTF-8",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+}
