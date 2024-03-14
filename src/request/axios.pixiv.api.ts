@@ -66,5 +66,4 @@ export namespace PixivAxios {
 
     export type PAxiosResponse = AxiosResponse
     export type PAxiosPromise = AxiosPromise
-
 }

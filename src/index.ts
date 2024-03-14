@@ -20,6 +20,7 @@ export class RPixiv {
     constructor(proxy?: AxiosProxyConfig) {
         this.proxy_config = proxy;
         this.axiosProxyInit();
+        
     }
 
     private axiosProxyInit() {
@@ -50,7 +51,8 @@ export class RPixiv {
         }
     }
 
-    public async token() {
+    public async getToken() {
+        const now = new Date().getTime();
         if (process.env.REFRESH_TOKEN) {
             this.setRefreshToken(process.env.REFRESH_TOKEN)
         } else {
@@ -68,39 +70,37 @@ export class RPixiv {
     }
 
     // TODO 后续看有无最佳实践用范性来替代类型断言
-    async getDayRanks(range: string) {
+    public async getDayRanks(range: string) {
         return await this.decoratorForData(PixivRequestSpace.getDayRanks, range)
     }
 
-    async getWeekRanks(range: string) {
+    public async getWeekRanks(range: string) {
         return await this.decoratorForData(PixivRequestSpace.getWeekRanks, range)
     }
 
-    async getMonthRanks(range: string) {
+    public async getMonthRanks(range: string) {
         return await this.decoratorForData(PixivRequestSpace.getMonthRanks, range)
     }
 
-    async searchIllusts(keywords: string) {
+    public async searchIllusts(keywords: string) {
         return await this.decoratorForData(PixivRequestSpace.searchIllusts, keywords)
     }
 
-    async searchIllustsById(id: string) {
+    public async searchIllustsById(id: string) {
         return await this.decoratorForData(PixivRequestSpace.searchIllustsById, id)
     }
 
-    async getAuthorIllusts(id: string, iType ?: UserIllustsType) {
+    public async getAuthorIllusts(id: string, iType ?: UserIllustsType) {
         return await this.decoratorForData(PixivRequestSpace.getAuthorIllusts, id, iType)
     }
 
-    async getAuthorInfo(id: string) {
+    public async getAuthorInfo(id: string) {
         return await this.decoratorForData(PixivRequestSpace.getAuthorInfo, id)
     }
 
-    async getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']) {
+    public async getPixivStream(url: string, rType?: AxiosRequestConfig['responseType']) {
         return await PixivRequestSpace.getPixivUrlData(url, rType)
     }
-
-
 }
 
 

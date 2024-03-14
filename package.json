@@ -1,70 +1,72 @@
 {
-    "name": "runtu-pixiv-sdk",
-    "version": "2.0.0-beta.2",
-    "type": "module",
-    "module": "dist/index.mjs",
-    "main": "dist/index.cjs",
-    "types": "index.d.ts",
-    "author": {
-        "name": "Runtus"
-    },
-    "description": "An SDK that can easily get Pixiv illustration data",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Runtus/pixiv-server-ts.git"
-    },
-    "license": "MIT",
-    "files": [
-        "dist",
-        "*.d.ts"
-    ],
-    "scripts": {
-        "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
-        "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
-        "test": "vitest",
-        "format": "prettier --write .",
-        "changeLog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "build": "rollup -c && cp node_modules/readline-sync/lib/read.sh ./dist/read.sh && cp node_modules/readline-sync/lib/read.ps1 ./dist/read.ps1",
-        "pub": "yarn build && bump && npm publish"
-    },
-    "dependencies": {
-        "@types/qs": "^6.9.7",
-        "@types/readline-sync": "^1.4.4",
-        "axios": "^0.26.1",
-        "base64url": "^3.0.1",
-        "cheerio": "^1.0.0-rc.12",
-        "dotenv": "^16.0.3",
-        "got": "^11.0.0",
-        "moment": "^2.29.3",
-        "qs": "^6.10.2",
-        "readline-sync": "^1.4.10",
-        "vitest": "^0.28.5"
-    },
-    "devDependencies": {
-        "@jsdevtools/version-bump-prompt": "^6.1.0",
-        "@rollup/plugin-alias": "^4.0.2",
-        "@rollup/plugin-commonjs": "^23.0.3",
-        "@rollup/plugin-json": "^5.0.2",
-        "@rollup/plugin-node-resolve": "^15.0.1",
-        "@types/node": "^16.11.12",
-        "@typescript-eslint/eslint-plugin": "^5.6.0",
-        "@typescript-eslint/parser": "^5.6.0",
-        "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^8.4.1",
-        "eslint-config-prettier": "^8.3.0",
-        "nodemon": "^2.0.18",
-        "prettier": "2.5.1",
-        "rollup": "^3.16.0",
-        "rollup-plugin-dts": "^5.2.0",
-        "rollup-plugin-esbuild": "^5.0.0",
-        "rollup-plugin-typescript2": "^0.34.1",
-        "ts-node": "^10.4.0",
-        "tsconfig-paths": "^3.12.0",
-        "typescript": "^4.5.2"
-    },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
+  "name": "runtu-pixiv-sdk",
+  "version": "2.0.0-beta.2",
+  "type": "module",
+  "module": "dist/index.mjs",
+  "main": "dist/index.cjs",
+  "types": "index.d.ts",
+  "author": {
+    "name": "Runtus"
+  },
+  "description": "An SDK that can easily get Pixiv illustration data",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Runtus/pixiv-server-ts.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "start": "node --nolazy -r ts-node/register -r tsconfig-paths/register src/index.ts",
+    "test": "vitest",
+    "format": "prettier --write .",
+    "changeLog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "build": "rollup -c && cp node_modules/readline-sync/lib/read.sh ./dist/read.sh && cp node_modules/readline-sync/lib/read.ps1 ./dist/read.ps1",
+    "pub": "yarn build && bump && npm publish",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@types/qs": "^6.9.7",
+    "@types/readline-sync": "^1.4.4",
+    "axios": "^0.26.1",
+    "base64url": "^3.0.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
+    "got": "^11.0.0",
+    "moment": "^2.29.3",
+    "qs": "^6.10.2",
+    "readline-sync": "^1.4.10",
+    "vitest": "^0.28.5"
+  },
+  "devDependencies": {
+    "@jsdevtools/version-bump-prompt": "^6.1.0",
+    "@rollup/plugin-alias": "^4.0.2",
+    "@rollup/plugin-commonjs": "^23.0.3",
+    "@rollup/plugin-json": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^9.0.11",
+    "nodemon": "^2.0.18",
+    "prettier": "^3.0.2",
+    "rollup": "^3.16.0",
+    "rollup-plugin-dts": "^5.2.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "^4.5.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }

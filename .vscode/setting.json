@@ -1,0 +1,5 @@
+{
+    "eslint.workingDirectories": [
+        "./src" // replace {PATH_TO_CLIENT} with you own path
+    ]
+}
