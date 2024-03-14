@@ -8,7 +8,6 @@ const formatWebIllusts: (content: string, id: string) => IllustWeb = (content, i
     let data: IllustWeb = null;
     try {
         const format = JSON.parse(content);
-        // console.log(format)
         const illust = format.illust[id];
         data = {
             id: illust.illustId,

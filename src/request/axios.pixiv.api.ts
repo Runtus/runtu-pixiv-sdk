@@ -18,7 +18,8 @@ export const setProxy = (proxy?: AxiosProxyConfig) => {
 axios.interceptors.response.use((res) => {
     return {
         status: STATUS_CODE.SUCCESS,
-        data:  res.data
+        data: res.data,
+        err: null
     };
 }, (err) => {
     console.error(err);

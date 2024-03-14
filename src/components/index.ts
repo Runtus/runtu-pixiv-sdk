@@ -2,6 +2,7 @@ import { DayRanks, WeekRanks, MonthRanks } from './ranking';
 import { searchIllusts, searchIllustsById } from './search'
 import { getUserInfo } from './user'
 import { getPixivUrlData } from './url'
+import { refreshAccessToken, initRefreshToken } from './token'
 
 export const PixivRequestSpace = {
     getDayRanks: DayRanks,
@@ -14,4 +15,7 @@ export const PixivRequestSpace = {
     getAuthorInfo: getUserInfo.details
 }
 
-
+export const PixivTokenRequestSpace = {
+    refreshAccessToken,
+    initRefreshToken
+}

@@ -52,10 +52,6 @@ import { RPixiv } from 'runtu-pixiv-sdk'
 // init
 const pixiv = new RPixiv(proxy)
 
-// token请求, 你必须请求这一步，否则后续会导致一些其他问题
-// request token, You must do this step, or this code could not run successfully.
-await pixiv.token();
-
 /**
 proxy: {
 	host: string,

@@ -23,5 +23,6 @@ export const getAccessToken: (refreshToken: string) => PixivResponse<PixivToken>
         headers,
         data: body,
     };
+
     return PixivAxios.pAxios(options)
 };

@@ -42,6 +42,9 @@ const plugins = [
   }),
 ]
 
+/**
+ * @type {import('rollup').RollupOptions}
+ */
 export default [
   ...entries.map(input => ({
     input,
@@ -55,7 +58,7 @@ export default [
         format: 'cjs',
         },
     ],
-    external: [],
+    external: ["src/test"],
     plugins,
   })),
   ...entries.map(input => ({
@@ -64,10 +67,9 @@ export default [
       file: input.replace('src/', '').replace('.ts', '.d.ts'),
       format: 'esm',
     },
-    external: [],
+    external: ["src/test"],
     plugins: [
       dts({ respectExternal: true }),
     ],
   })),
-
 ]

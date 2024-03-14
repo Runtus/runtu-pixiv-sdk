@@ -313,7 +313,7 @@ declare class RPixiv {
     private setRefreshToken;
     private setStartTime;
     private checkTime;
-    token(): Promise<void>;
+    private tokenInit;
     private decoratorForData;
     getDayRanks(range: string): Promise<{
         status: STATUS_CODE;
