@@ -26,7 +26,8 @@
     "changeLog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "build": "rollup -c && cp node_modules/readline-sync/lib/read.sh ./dist/read.sh && cp node_modules/readline-sync/lib/read.ps1 ./dist/read.ps1",
     "pub": "yarn build && bump && npm publish",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "@types/qs": "^6.9.7",
@@ -42,6 +43,8 @@
     "vitest": "^0.28.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.1.0",
+    "@commitlint/config-conventional": "^19.1.0",
     "@jsdevtools/version-bump-prompt": "^6.1.0",
     "@rollup/plugin-alias": "^4.0.2",
     "@rollup/plugin-commonjs": "^23.0.3",
